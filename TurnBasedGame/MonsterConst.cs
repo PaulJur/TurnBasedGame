@@ -13,8 +13,10 @@ namespace EntityList
         #region Variables
         private string _name;
         private int _hitPoints;
-        public int AttackDamage { get; set; }
-        public int Heal { get; set; }
+        private int _minimumAttackDamage;
+        private int _maximumAttackDamage;
+        private int _minimumHeal;
+        private int _maximumHeal;
         #endregion
 
         public string Name
@@ -35,12 +37,50 @@ namespace EntityList
             }
         }
 
-        public Monster(string name, int hitPoints, int attackDamage, int heal)
+        public int MinimumAttackDamage
+        {
+            get { return _minimumAttackDamage; }
+            set
+            {
+                _minimumAttackDamage = value;
+            }
+        }
+
+        public int MaximumAttackDamage
+        {
+            get { return _maximumAttackDamage; }
+            set 
+            { 
+                _maximumAttackDamage= value;
+            }
+        }
+
+        public int MinimumHeal
+        {
+            get { return _minimumHeal; }
+            set 
+            {
+             _minimumHeal= value;
+            }
+        }
+
+        public int MaximumHeal
+        {
+            get { return _maximumHeal; }
+            set
+            {
+                _maximumHeal = value;
+            }
+        }
+
+        public Monster(string name, int hitPoints, int minAttackDamage,int maxAttackDamge, int minmumheal, int maximumHeal)
         {
             Name = name;
             HitPoints = hitPoints;
-            AttackDamage = attackDamage;
-            Heal = heal;
+            _minimumAttackDamage = minAttackDamage;
+            _maximumAttackDamage = maxAttackDamge;
+            _minimumHeal = minmumheal;
+            _maximumHeal = maximumHeal;
             HitPoints = hitPoints;
         }
     }
