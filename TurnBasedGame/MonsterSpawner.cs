@@ -10,7 +10,7 @@ namespace TurnBasedGame
     public static class MonsterSpawner
     {
         private static readonly Random _simpleGenerator = new Random();
-        public static Monster GetMonster(int monsterID)
+        public static Monster GetMonster(int monsterID)//a list of monsters that have their own ID and will be generated each encounter
         {
             switch(monsterID)
             {
@@ -32,7 +32,7 @@ namespace TurnBasedGame
 
         }
         
-        public static int RandomNumber(int minimumValue, int maximumValue)
+        public static int RandomNumber(int minimumValue, int maximumValue)//Selects a number between values randomly
         {
             return _simpleGenerator.Next(minimumValue, maximumValue + 1);
         }

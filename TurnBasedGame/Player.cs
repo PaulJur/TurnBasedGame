@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TurnBasedGame
 {
+    //Player class for variables and their get; sets;
     public class Player
     {
         private string _name;

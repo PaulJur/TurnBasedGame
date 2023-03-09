@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityList
 {
-    
+    //General variables for the monster class and a constructor
     public class Monster
     {
         #region Variables
@@ -17,15 +17,15 @@ namespace EntityList
         public int Heal { get; set; }
         #endregion
 
-        public string Name {
+        public string Name
+        {
             get { return _name; }
             set
             {
                 _name = value;
             }
-        
-        }
 
+        }
         public int HitPoints
         {
             get { return _hitPoints; }
