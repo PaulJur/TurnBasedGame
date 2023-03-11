@@ -16,15 +16,15 @@ namespace TurnBasedGame
             {
                 case 1:
                     Monster Goblin =
-                        new Monster("Goblin", 10, 5, 8, 3, 5,10);
+                        new Monster("Goblin", 10, 5, 8, 3, 5,10,5);
                     return Goblin;
                 case 2:
                     Monster Orc =
-                        new Monster("Orc", 15, 8,10, 7, 10,15);
+                        new Monster("Orc", 15, 8,10, 7, 10,15,10);
                     return Orc;
                 case 3:
                     Monster Troll =
-                        new Monster("Troll", 25, 12,15, 8, 12,25);
+                        new Monster("Troll", 25, 12,15, 8, 12,25,15);
                     return Troll;
                 default:
                     throw new ArgumentException(String.Format("MonsterType '{0}' does not exist", monsterID));

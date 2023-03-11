@@ -23,10 +23,13 @@ namespace TurnBasedCombat
   
 
             var counter = 0;
+            bool levelUp;
             #region playerInfo
-            Player player = new Player();
-            player.Name = "Chad";
-            player.HitPoints = 50;
+            Player player = new Player("Chad",50,50,4,11,6,10,0,0);
+            //player.Name = "Chad";
+            //player.HitPoints = 50;
+           // player.Level = 1;
+           // player.Experience = 0;
             
 
             #endregion
@@ -41,13 +44,12 @@ namespace TurnBasedCombat
             while (true)
             {
 
-
                 int randomMonsterID = MonsterSpawner.RandomNumber(1, 3);
                 Monster randomMonster = MonsterSpawner.GetMonster(randomMonsterID);
                
                 while (player.HitPoints>0 && randomMonster.HitPoints > 0) 
                 {
-                    player.AttackDamage = MonsterSpawner.RandomNumber(5, 10);
+                    player.AttackDamage = MonsterSpawner.RandomNumber(player.minimumDamage, player.maximumDamage);
                     counter++;
                     if (counter <= 1)
                     {
@@ -70,19 +72,37 @@ namespace TurnBasedCombat
                     {
                         Console.WriteLine(player.Name + " DEALT: " + player.AttackDamage + " To " + randomMonster.Name);
                         randomMonster.HitPoints -= player.AttackDamage;
+                         if (randomMonster.HitPoints <= 0)
+                        {
+                            counter = 0;
+                            Console.WriteLine($"{randomMonster.Name} Killed!");
+                            player.Experience += randomMonster.experienceDrop;
+                            Console.WriteLine("You have leveled up!");
+                            if (player.Experience >= 10)
+                            {
+                                player.Level += 1;
+                                levelUp = true;
+                                if (levelUp == true)
+                                {
+                                    player.HitPoints = player.maximumHitPoints;
+                                    player.minimumDamage += 1;
+                                    player.maximumDamage += 2;
+                                    player.minimumHeal += 1;
+                                    player.maximumHeal += 2;
+                                    player.maximumHitPoints += 5;
+                                    levelUp = false;
+                                }
+                            }
+                            Console.WriteLine(" ");
+                        }
                         Thread.Sleep(1000);
-                        Console.WriteLine("Monster Turn!");
+                        Console.WriteLine($"{randomMonster.Name}'s Turn!");
                         Console.WriteLine("------------------------------------------------------");
                         Console.WriteLine(" ");
                         Thread.Sleep(1500);
                         MonsterActions.MonsterTakingAction(randomMonster,player);
 
-                        if (randomMonster.HitPoints <= 0)
-                        {
-                            counter = 0;
-                            Console.WriteLine("Monster Killed!");
-                            //Console.WriteLine("If you want to quit press q!");
-                        }
+                       
 
 
                     }
@@ -92,17 +112,17 @@ namespace TurnBasedCombat
                         Console.WriteLine("Healed for: " + player.Heal + "HP" + " Current Health: " + player.HitPoints);
 
                         Thread.Sleep(1000);
-                        Console.WriteLine("Monster Turn!");
+                        Console.WriteLine($"{randomMonster.Name}'s Turn!");
                         Console.WriteLine("------------------------------------------------------");
                         Console.WriteLine(" ");
                         Thread.Sleep(1500);
                         MonsterActions.MonsterTakingAction(randomMonster, player);
 
-                        if (player.HitPoints < 30)// Healing not allowed until the player is below 30HP
+                        if (player.HitPoints < player.maximumHitPoints/2)// Healing not allowed until the player is below 30HP
                         {
                             for (int i = 1; i <= 1; i++)
                             {
-                                player.Heal = MonsterSpawner.RandomNumber(2, 10);
+                                player.Heal = MonsterSpawner.RandomNumber(player.minimumHeal, player.maximumHeal);
                             }
                         }
                         else { Console.WriteLine("You are to healthy to heal!"); Console.WriteLine(" "); }
@@ -121,6 +141,12 @@ namespace TurnBasedCombat
                         Console.WriteLine("Thank you for playing!");
 
                     }
+
+                    if (choice == "stats")
+                    {
+                        Console.WriteLine($"Max HP: {player.maximumHitPoints}");
+                    }
+
                     
                 }
                
