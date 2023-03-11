@@ -22,10 +22,25 @@ namespace TurnBasedGame
                     Console.WriteLine($"{_monster.Name} Dealt: {_monsterDamage} to player");
                     break;
                 case 2:
-                    Console.WriteLine($"{_monster.Name} Heals!");
-                    int _monsterHealAmount = MonsterSpawner.RandomNumber(_monster.MinimumHeal,_monster.MaximumHeal);
-                    _monster.HitPoints += _monsterHealAmount;
-                    Console.WriteLine($"{_monster.Name} healed for {_monsterHealAmount}HP");
+                    if (_monster.HitPoints < _monster.MaximumHealth+1)
+                    {
+                        Console.WriteLine($"{_monster.Name} Heals!");
+                        int _monsterHealAmount = MonsterSpawner.RandomNumber(_monster.MinimumHeal, _monster.MaximumHeal);
+                        _monster.HitPoints += _monsterHealAmount;
+                        Console.WriteLine($"{_monster.Name} healed for {_monsterHealAmount}HP");
+
+                        if (_monster.HitPoints > _monster.MaximumHealth)
+                        {
+                            _monster.HitPoints = _monster.MaximumHealth+1;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{_monster.Name} wanted to heal but it's too healthy so it decided to Attack!");
+                        int _monsterDamageOverHeal= MonsterSpawner.RandomNumber(_monster.MinimumAttackDamage, _monster.MaximumAttackDamage);
+                        player.HitPoints -= _monsterDamageOverHeal;
+                        Console.WriteLine($"{_monster.Name} Dealt: {_monsterDamageOverHeal} to player");
+                    }
                     break;
                 default:
                     Console.WriteLine($"{_monster.Name} decided to do nothing!");
@@ -34,8 +49,6 @@ namespace TurnBasedGame
                 
 
         }
-
-
 
     }
 }

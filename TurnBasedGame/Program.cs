@@ -20,15 +20,14 @@ namespace TurnBasedCombat
         
         static void Main(string[] args)
         {
-            
-            Random r = new Random();
+  
 
             var counter = 0;
             #region playerInfo
             Player player = new Player();
             player.Name = "Chad";
             player.HitPoints = 50;
-            player.AttackDamage = 5;
+            
 
             #endregion
             Console.WriteLine("Game made by Paulius Jurgelis");
@@ -41,13 +40,14 @@ namespace TurnBasedCombat
 
             while (true)
             {
-                
+
 
                 int randomMonsterID = MonsterSpawner.RandomNumber(1, 3);
                 Monster randomMonster = MonsterSpawner.GetMonster(randomMonsterID);
                
                 while (player.HitPoints>0 && randomMonster.HitPoints > 0) 
                 {
+                    player.AttackDamage = MonsterSpawner.RandomNumber(5, 10);
                     counter++;
                     if (counter <= 1)
                     {
@@ -61,7 +61,7 @@ namespace TurnBasedCombat
                     Console.WriteLine(" ");
                     Console.WriteLine($"Monster Health: {randomMonster.HitPoints}");
                     Console.WriteLine(" ");
-                    Console.WriteLine("A TO ATTACK H TO HEAL");
+                    Console.WriteLine("A TO ATTACK H TO HEAL                   Write 'help' if you need to remember");
                     Console.WriteLine("------------------------------------------------------");
 
                     string choice = Console.ReadLine();
@@ -76,8 +76,6 @@ namespace TurnBasedCombat
                         Console.WriteLine(" ");
                         Thread.Sleep(1500);
                         MonsterActions.MonsterTakingAction(randomMonster,player);
-
-                        
 
                         if (randomMonster.HitPoints <= 0)
                         {
@@ -104,10 +102,17 @@ namespace TurnBasedCombat
                         {
                             for (int i = 1; i <= 1; i++)
                             {
-                                player.Heal = r.Next(2, 11);//Heals a random amount between 2 and 10
+                                player.Heal = MonsterSpawner.RandomNumber(2, 10);
                             }
                         }
                         else { Console.WriteLine("You are to healthy to heal!"); Console.WriteLine(" "); }
+                    }
+
+                    if(choice == "help")
+                    {
+                        Console.WriteLine(" ");
+                        Console.WriteLine("You can only heal below 30HP");
+                        Console.WriteLine("------------------------------------------------------");
                     }
                    
                     if(choice == "q") {

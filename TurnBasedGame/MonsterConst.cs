@@ -17,6 +17,7 @@ namespace EntityList
         private int _maximumAttackDamage;
         private int _minimumHeal;
         private int _maximumHeal;
+        private int _maximumHealth;
         #endregion
 
         public string Name
@@ -73,7 +74,16 @@ namespace EntityList
             }
         }
 
-        public Monster(string name, int hitPoints, int minAttackDamage,int maxAttackDamge, int minmumheal, int maximumHeal)
+        public int MaximumHealth
+        {
+            get { return _maximumHealth; }
+            set
+            {
+                _maximumHealth= value;
+            }
+        }
+
+        public Monster(string name, int hitPoints, int minAttackDamage,int maxAttackDamge, int minmumheal, int maximumHeal, int maximumHealth)
         {
             Name = name;
             HitPoints = hitPoints;
@@ -82,6 +92,7 @@ namespace EntityList
             _minimumHeal = minmumheal;
             _maximumHeal = maximumHeal;
             HitPoints = hitPoints;
+            _maximumHealth = maximumHealth;
         }
     }
 
