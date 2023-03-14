@@ -1,4 +1,4 @@
-﻿using EntityList;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TurnBasedGame
 {
-    public class MonsterActions
+    public static class MonsterActions
     {
         
         public static void MonsterTakingAction(Monster _monster, Player player)

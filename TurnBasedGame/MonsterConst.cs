@@ -5,11 +5,13 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityList
+namespace TurnBasedGame
 {
     //General variables for the monster class and a constructor
     public class Monster
     {
+        public List<Items> monsterDropTable { get; set; }
+
         #region Variables
         private string _name;
         private int _hitPoints;
@@ -95,16 +97,16 @@ namespace EntityList
 
         public Monster(string name, int hitPoints, int minAttackDamage,int maxAttackDamge, int minmumheal, int maximumHeal, int maximumHealth,int experienceDrop)
         {
-            Name = name;
-            HitPoints = hitPoints;
+            _name = name;
+            _hitPoints = hitPoints;
             _minimumAttackDamage = minAttackDamage;
             _maximumAttackDamage = maxAttackDamge;
             _minimumHeal = minmumheal;
             _maximumHeal = maximumHeal;
-            HitPoints = hitPoints;
             _maximumHealth = maximumHealth;
             _experienceDrop = experienceDrop;
         }
+
     }
 
 }

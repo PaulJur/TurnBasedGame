@@ -10,6 +10,7 @@ namespace TurnBasedGame
     //Player class for variables and their get; sets;
     public class Player
     {
+        #region PlayerStatVariables
         private string _name;
         private int _hitPoints;
         private int _attackDamage;
@@ -24,6 +25,7 @@ namespace TurnBasedGame
         private int _level;
 
         public int experienceRequired = 10;
+        #endregion
 
         public Player(string name, int hitPoints,int maximumHitPoints,int minimumHeal, int maximumHeal, int minimumDamage, int maximumDamage,int experience, int level)
         {
@@ -152,5 +154,7 @@ namespace TurnBasedGame
             Console.WriteLine("You have Leveled up!");
         }
     }
+
+    
 
 }
