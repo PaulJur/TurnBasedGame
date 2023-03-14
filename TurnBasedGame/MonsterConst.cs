@@ -103,6 +103,7 @@ namespace EntityList
             _maximumHeal = maximumHeal;
             HitPoints = hitPoints;
             _maximumHealth = maximumHealth;
+            _experienceDrop = experienceDrop;
         }
     }
 

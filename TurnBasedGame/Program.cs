@@ -9,8 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TurnBasedGame;
 using System.Threading;
-
-
+using System.Diagnostics;
 
 namespace TurnBasedCombat
 {
@@ -23,14 +22,8 @@ namespace TurnBasedCombat
   
 
             var counter = 0;
-            bool levelUp;
             #region playerInfo
-            Player player = new Player("Chad",50,50,4,11,6,10,0,0);
-            //player.Name = "Chad";
-            //player.HitPoints = 50;
-           // player.Level = 1;
-           // player.Experience = 0;
-            
+            Player player = new Player("Chad",50,50,4,11,6,10,0,0);    
 
             #endregion
             Console.WriteLine("Game made by Paulius Jurgelis");
@@ -43,7 +36,6 @@ namespace TurnBasedCombat
 
             while (true)
             {
-
                 int randomMonsterID = MonsterSpawner.RandomNumber(1, 3);
                 Monster randomMonster = MonsterSpawner.GetMonster(randomMonsterID);
                
@@ -63,7 +55,7 @@ namespace TurnBasedCombat
                     Console.WriteLine(" ");
                     Console.WriteLine($"Monster Health: {randomMonster.HitPoints}");
                     Console.WriteLine(" ");
-                    Console.WriteLine("A TO ATTACK H TO HEAL                   Write 'help' if you need to remember");
+                    Console.WriteLine("A TO ATTACK H TO HEAL          'stats' for player stats         Write 'help' if you need to remember");
                     Console.WriteLine("------------------------------------------------------");
 
                     string choice = Console.ReadLine();
@@ -71,45 +63,33 @@ namespace TurnBasedCombat
                     if (choice == "a")
                     {
                         Console.WriteLine(player.Name + " DEALT: " + player.AttackDamage + " To " + randomMonster.Name);
+                        Console.WriteLine(" ");
                         randomMonster.HitPoints -= player.AttackDamage;
-                         if (randomMonster.HitPoints <= 0)
+                         if (randomMonster.HitPoints <= 0)//If the monsters HP reaches <=0 player gets experience and if the player reaches the threshold they level up resetting xp to 0
                         {
                             counter = 0;
                             Console.WriteLine($"{randomMonster.Name} Killed!");
-                            player.Experience += randomMonster.experienceDrop;
-                            Console.WriteLine("You have leveled up!");
-                            if (player.Experience >= 10)
-                            {
-                                player.Level += 1;
-                                levelUp = true;
-                                if (levelUp == true)
-                                {
-                                    player.HitPoints = player.maximumHitPoints;
-                                    player.minimumDamage += 1;
-                                    player.maximumDamage += 2;
-                                    player.minimumHeal += 1;
-                                    player.maximumHeal += 2;
-                                    player.maximumHitPoints += 5;
-                                    levelUp = false;
-                                }
-                            }
-                            Console.WriteLine(" ");
+                            player.PlayerExperienceGain(randomMonster.experienceDrop);
+
+                            Thread.Sleep(1000);
+                            break;
+                            
                         }
                         Thread.Sleep(1000);
-                        Console.WriteLine($"{randomMonster.Name}'s Turn!");
+                        if (randomMonster.HitPoints > 0)
+                        {
+                            Console.WriteLine($"{randomMonster.Name}'s Turn!");
+                        }
                         Console.WriteLine("------------------------------------------------------");
                         Console.WriteLine(" ");
+
                         Thread.Sleep(1500);
                         MonsterActions.MonsterTakingAction(randomMonster,player);
-
-                       
-
-
                     }
                     if (choice == "h")
                     {
                         player.HitPoints += player.Heal;
-                        Console.WriteLine("Healed for: " + player.Heal + "HP" + " Current Health: " + player.HitPoints);
+                        Console.WriteLine("Healed for: " + player.Heal + "HP" + " Current Health: " + player.HitPoints);//Player heals for an amount
 
                         Thread.Sleep(1000);
                         Console.WriteLine($"{randomMonster.Name}'s Turn!");
@@ -144,9 +124,18 @@ namespace TurnBasedCombat
 
                     if (choice == "stats")
                     {
-                        Console.WriteLine($"Max HP: {player.maximumHitPoints}");
+                        Console.WriteLine("");
+                        Console.WriteLine($"Current XP: {player.Experience}");
+                        Console.WriteLine($"Required XP to level up: {player.experienceRequired}");
+                        Console.WriteLine($"Current Level: {player.Level}");
+                        Console.WriteLine(" ");
+                        Console.WriteLine("STATS");
+                        Console.WriteLine(" ");
+                        Console.WriteLine($"Your Damage: Minimum {player.minimumDamage} to Maximum {player.maximumDamage}");
+                        Console.WriteLine($"Your Heal: Minimum {player.minimumHeal} to Maximum {player.maximumHeal}");
+                        Console.WriteLine($"Your Maximum HP: {player.maximumHitPoints}");
+                        Console.WriteLine("------------------------------------------------------");
                     }
-
                     
                 }
                

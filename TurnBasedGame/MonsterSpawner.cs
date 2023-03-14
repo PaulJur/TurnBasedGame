@@ -9,7 +9,7 @@ namespace TurnBasedGame
 {
     public static class MonsterSpawner
     {
-        private static readonly Random _simpleGenerator = new Random();
+        private static Random _simpleGenerator = new Random();
         public static Monster GetMonster(int monsterID)//a list of monsters that have their own ID and will be generated each encounter
         {
             switch(monsterID)

@@ -23,6 +23,8 @@ namespace TurnBasedGame
         private int _experience;
         private int _level;
 
+        public int experienceRequired = 10;
+
         public Player(string name, int hitPoints,int maximumHitPoints,int minimumHeal, int maximumHeal, int minimumDamage, int maximumDamage,int experience, int level)
         {
             _name = name;
@@ -125,5 +127,30 @@ namespace TurnBasedGame
                 _maximumHitPoints = value;
             }
         }
+
+        public void PlayerExperienceGain(int _monsterExperienceDrop)//When monster is killed experience gets added to the player and they level up
+        {
+            Experience += _monsterExperienceDrop;
+
+            if(Experience>=experienceRequired)
+            {
+                PlayerLevelUp();
+            }
+        }
+
+        private void PlayerLevelUp()//Player levels up, damage, healing scales up. Experience is set to 0  then the experience to level up goes up by 50%
+        {
+            Level++;
+            HitPoints = maximumHitPoints;
+            maximumHitPoints += 5;
+            minimumDamage = (int)Math.Round(minimumDamage * 1.1);
+            maximumDamage = (int)Math.Round(maximumDamage * 1.3);
+            minimumHeal = (int)Math.Round(minimumHeal * 1.1);
+            maximumHeal = (int)Math.Round(maximumHeal * 1.3);
+            Experience = 0;
+            experienceRequired = (int)Math.Round(experienceRequired * 1.5);
+            Console.WriteLine("You have Leveled up!");
+        }
     }
+
 }
