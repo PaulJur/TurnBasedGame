@@ -10,6 +10,8 @@ namespace TurnBasedGame
     //Player class for variables and their get; sets;
     public class Player
     {
+        Items item;
+
         #region PlayerStatVariables
         private string _name;
         private int _hitPoints;
@@ -143,7 +145,7 @@ namespace TurnBasedGame
         private void PlayerLevelUp()//Player levels up, damage, healing scales up. Experience is set to 0  then the experience to level up goes up by 50%
         {
             Level++;
-            HitPoints = maximumHitPoints;
+            HitPoints += maximumHitPoints/3;
             maximumHitPoints += 5;
             minimumDamage = (int)Math.Round(minimumDamage * 1.1);
             maximumDamage = (int)Math.Round(maximumDamage * 1.3);
@@ -152,6 +154,16 @@ namespace TurnBasedGame
             Experience = 0;
             experienceRequired = (int)Math.Round(experienceRequired * 1.5);
             Console.WriteLine("You have Leveled up!");
+        }
+
+        public void EquipSword(Items sword)
+        {
+            minimumDamage += sword.minAttackDamage;
+            maximumDamage += sword.maxAttackDamage;
+        }
+        public void UsePotion(Items potion)
+        {
+            HitPoints += item.maxhealing;
         }
     }
 

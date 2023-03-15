@@ -10,8 +10,6 @@ namespace TurnBasedGame
     //General variables for the monster class and a constructor
     public class Monster
     {
-        public List<Items> monsterDropTable { get; set; }
-
         #region Variables
         private string _name;
         private int _hitPoints;

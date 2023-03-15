@@ -12,13 +12,15 @@ namespace TurnBasedGame
         
         public static void MonsterTakingAction(Monster _monster, Player player)
         {
-            int _action = MonsterSpawner.RandomNumber(1, 3);
+            int _action = MonsterSpawner.RandomNumber(1, 3);//Picks from these numbers to choose an action for the monster
             switch (_action)
             {
                 case 1:
                     Console.WriteLine($"{_monster.Name} Attacks!");
+
                     int _monsterDamage = MonsterSpawner.RandomNumber(_monster.MinimumAttackDamage, _monster.MaximumAttackDamage);
                     player.HitPoints -= _monsterDamage;
+
                     Console.WriteLine($"{_monster.Name} Dealt: {_monsterDamage} to player");
                     break;
                 case 2:

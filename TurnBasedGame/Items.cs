@@ -12,7 +12,6 @@ namespace TurnBasedGame
         private string _description;
         private int _minattackDamage;
         private int _maxattackDamage;
-        private int _minhealing;
         private int _maxhealing;
 
         public string Name
@@ -55,14 +54,6 @@ namespace TurnBasedGame
                 _maxhealing = value;
             }
         }
-        public int minHealing
-        {
-            get { return _minhealing; }
-            set
-            {
-                _minhealing = value;
-            }
-        }
 
 
         public Items(string Name, string Description, int minAttack, int maxAttack)
@@ -72,14 +63,14 @@ namespace TurnBasedGame
             _minattackDamage=minAttack;
             _maxattackDamage=maxAttack;
         }
-        public Items(string Name,int minhealing, int maxHealing, string Description)
+        public Items(string Name,int maxHealing, string Description)
         {
             _name=Name;
             _description=Description;
-            _minhealing=minhealing;
             _maxhealing=maxhealing;
         }
 
+        
     }
 
 
