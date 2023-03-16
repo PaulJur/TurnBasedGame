@@ -105,7 +105,7 @@ namespace TurnBasedCombat
                     {
                         Console.WriteLine("You can only heal below 30HP\n");
                         Console.WriteLine("Write 'inventory' to show your inventory\n");
-                        Console.WriteLine("Write 'potion' to use one of your healing potions (NOT WORKING YET)");
+                        Console.WriteLine("Write 'potion' to use one of your healing potions");
                         Console.WriteLine("------------------------------------------------------");
                     }
                    
