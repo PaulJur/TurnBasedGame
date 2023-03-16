@@ -163,7 +163,11 @@ namespace TurnBasedGame
         }
         public void UsePotion(Items potion)
         {
-            HitPoints += item.maxhealing;
+            HitPoints += potion.maxhealing;
+            if(HitPoints > maximumHitPoints)
+            {
+                HitPoints= maximumHitPoints;
+            }
         }
     }
 

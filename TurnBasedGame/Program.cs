@@ -135,7 +135,9 @@ namespace TurnBasedCombat
                     
                     if(choice == "potion")
                     {
-                        //player.UsePotion();
+                        Items healingPotion = monsterItemDrop.GetHealingPotion();
+                        player.UsePotion(healingPotion);
+                        inventory.RemoveItem(healingPotion);
                     }
                 }
                
