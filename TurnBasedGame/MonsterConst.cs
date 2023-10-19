@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TurnBasedGame
 {
     //General variables for the monster class and a constructor
-    public class Monster
+    public class MonsterConst
     {
         #region Variables
         private string _name;
@@ -93,7 +93,7 @@ namespace TurnBasedGame
             }
         }
 
-        public Monster(string name, int hitPoints, int minAttackDamage,int maxAttackDamge, int minmumheal, int maximumHeal, int maximumHealth,int experienceDrop)
+        public MonsterConst(string name, int hitPoints, int minAttackDamage,int maxAttackDamge, int minmumheal, int maximumHeal, int maximumHealth,int experienceDrop)
         {
             _name = name;
             _hitPoints = hitPoints;
@@ -104,7 +104,10 @@ namespace TurnBasedGame
             _maximumHealth = maximumHealth;
             _experienceDrop = experienceDrop;
         }
-
+        public bool Dodge()
+        {
+            return false;
+        }
     }
 
 }

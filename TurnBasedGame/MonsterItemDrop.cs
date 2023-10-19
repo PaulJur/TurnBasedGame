@@ -10,7 +10,7 @@ namespace TurnBasedGame
     {
         Items HealingPotion = new Items("Healing Potion", 15, "A simple Healing Potion");
         Items IronSword = new Items("Sword", "A normal sword", 5, 10);
-        public void Drop(Monster _monster, Player _player, Inventory _inventory) {
+        public void Drop(MonsterConst _monster, Player _player, Inventory _inventory) {
             int _number = MonsterSpawner.RandomNumber(1, 15);//Randomizes a number between 1-15
             bool swordEquipped = false;
 

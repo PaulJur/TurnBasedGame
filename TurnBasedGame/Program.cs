@@ -33,8 +33,8 @@ namespace TurnBasedCombat
 
             while (true)
             {
-                int randomMonsterID = MonsterSpawner.RandomNumber(1, 3);
-                Monster randomMonster = MonsterSpawner.GetMonster(randomMonsterID);
+                int randomMonsterID = MonsterSpawner.RandomNumber(1,4);
+                MonsterConst randomMonster = MonsterSpawner.GetMonster(randomMonsterID);
                 MonsterItemDrop monsterItemDrop = new MonsterItemDrop();
                 
 
@@ -56,20 +56,30 @@ namespace TurnBasedCombat
 
                     if (choice == "a")
                     {
-                        Console.WriteLine(player.Name + " DEALT: " + player.AttackDamage + " To " + randomMonster.Name+ "\n");
 
-                        randomMonster.HitPoints -= player.AttackDamage;
-                         if (randomMonster.HitPoints <= 0)//If the monsters HP reaches <=0 player gets experience and if the player reaches the threshold they level up resetting xp to 0
+                        if(randomMonster.Dodge())
                         {
-                            counter = 0;
-                            monsterItemDrop.Drop(randomMonster, player,inventory);
-                            Console.WriteLine($"{randomMonster.Name} Killed!");
-                            player.PlayerExperienceGain(randomMonster.experienceDrop);
-
-                            Thread.Sleep(1000);
-                            break;
-                            
+                            Console.WriteLine($"{randomMonster.Name} dodged the player's attack!");
                         }
+                        else
+                        {
+                            Console.WriteLine(player.Name + " DEALT: " + player.AttackDamage + " To " + randomMonster.Name + "\n");
+
+                            randomMonster.HitPoints -= player.AttackDamage;
+                            if (randomMonster.HitPoints <= 0)//If the monsters HP reaches <=0 player gets experience and if the player reaches the threshold they level up resetting xp to 0
+                            {
+                                counter = 0;
+                                monsterItemDrop.Drop(randomMonster, player, inventory);
+                                Console.WriteLine($"{randomMonster.Name} Killed!");
+                                player.PlayerExperienceGain(randomMonster.experienceDrop);
+
+                                Thread.Sleep(1000);
+                                break;
+
+                            }
+                        }
+
+                        
                         Thread.Sleep(1000);
                         if (randomMonster.HitPoints > 0)
                         {
