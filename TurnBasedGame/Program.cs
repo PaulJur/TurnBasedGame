@@ -33,14 +33,14 @@ namespace TurnBasedCombat
 
             while (true)
             {
-                int randomMonsterID = MonsterSpawner.RandomNumber(1,4);
+                int randomMonsterID = MonsterSpawner.RandomNumber(4,4);
                 MonsterConst randomMonster = MonsterSpawner.GetMonster(randomMonsterID);
                 MonsterItemDrop monsterItemDrop = new MonsterItemDrop();
-                
+
 
                 while (player.HitPoints>0 && randomMonster.HitPoints > 0) 
                 {
-                    player.AttackDamage = MonsterSpawner.RandomNumber(player.minimumDamage, player.maximumDamage);
+                    
                     counter++;
                     if (counter <= 1)
                     {
@@ -52,17 +52,23 @@ namespace TurnBasedCombat
                     Console.WriteLine("A TO ATTACK H TO HEAL          'stats' for player stats         Write 'help' if you need to remember");
                     Console.WriteLine("------------------------------------------------------");
 
-                    string choice = Console.ReadLine();
+                    string? choice = Console.ReadLine();
 
                     if (choice == "a")
                     {
+                        player.AttackDamage = MonsterSpawner.RandomNumber(player.minimumDamage, player.maximumDamage);
 
-                        if(randomMonster.Dodge())
-                        {
-                            Console.WriteLine($"{randomMonster.Name} dodged the player's attack!");
-                        }
-                        else
-                        {
+                        if (randomMonsterID == 4)//dodging for the flying eagle monster set for 20%.
+                            {
+                                bool didDodge = randomMonster.Dodge(20);
+
+                                if (didDodge)
+                                {
+                                    Console.WriteLine($"{randomMonster.Name} dodged your attack!");
+                                    player.AttackDamage = 0;
+                                }
+                            }    
+
                             Console.WriteLine(player.Name + " DEALT: " + player.AttackDamage + " To " + randomMonster.Name + "\n");
 
                             randomMonster.HitPoints -= player.AttackDamage;
@@ -77,18 +83,19 @@ namespace TurnBasedCombat
                                 break;
 
                             }
-                        }
 
-                        
-                        Thread.Sleep(1000);
-                        if (randomMonster.HitPoints > 0)
-                        {
-                            Console.WriteLine($"{randomMonster.Name}'s Turn!");
-                        }
-                        Console.WriteLine("------------------------------------------------------\n");
 
-                        Thread.Sleep(1500);
-                        MonsterActions.MonsterTakingAction(randomMonster,player);
+                            Thread.Sleep(1000);
+                            if (randomMonster.HitPoints > 0)
+                            {
+                                Console.WriteLine($"{randomMonster.Name}'s Turn!");
+                            }
+                            Console.WriteLine("------------------------------------------------------\n");
+
+                            Thread.Sleep(1500);
+                            MonsterActions.MonsterTakingAction(randomMonster, player);
+
+
                     }
                     if (choice == "h")
                     {

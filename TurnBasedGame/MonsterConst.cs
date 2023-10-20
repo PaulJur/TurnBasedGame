@@ -104,8 +104,14 @@ namespace TurnBasedGame
             _maximumHealth = maximumHealth;
             _experienceDrop = experienceDrop;
         }
-        public bool Dodge()
+        public bool Dodge(int dodgeChance)
         {
+            int dodgeRoll = MonsterSpawner.RandomNumber(1, 100);
+
+            if (dodgeRoll <= dodgeChance)
+            {
+                return true;
+            }
             return false;
         }
     }

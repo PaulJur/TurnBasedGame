@@ -20,7 +20,7 @@ namespace TurnBasedGame
                 case 1:
                     if (swordEquipped == false)
                     {
-                        Console.WriteLine($"The monster has dropped a Sword! It adds MIN{IronSword.minAttackDamage}  MAX{IronSword.maxAttackDamage} to your attacks!");
+                        Console.WriteLine($"The monster has dropped a Sword! It adds MIN {IronSword.minAttackDamage}  MAX {IronSword.maxAttackDamage} to your attacks!");
 
                         _inventory.AddItem(IronSword);
                         _player.EquipSword(IronSword);
