@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
@@ -10,8 +11,6 @@ namespace TurnBasedGame
     //Player class for variables and their get; sets;
     public class Player
     {
-        Items item;
-
         #region PlayerStatVariables
         private string _name;
         private int _hitPoints;
@@ -154,6 +153,14 @@ namespace TurnBasedGame
             Experience = 0;
             experienceRequired = (int)Math.Round(experienceRequired * 1.5);
             Console.WriteLine("You have Leveled up!");
+        }
+
+        public int Attack()
+        {
+            int damage = MonsterSpawner.RandomNumber(minimumDamage,maximumDamage);
+            AttackDamage = damage;
+
+            return damage;
         }
 
         public void EquipSword(Items sword)

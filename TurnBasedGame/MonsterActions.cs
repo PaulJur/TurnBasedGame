@@ -7,60 +7,61 @@ using System.Threading.Tasks;
 
 namespace TurnBasedGame
 {
-    public static class MonsterActions
+    public class MonsterActions
     {
         
-        public static void MonsterTakingAction(MonsterConst _monster, Player player)
+        public static void MonsterTakingAction(MonsterConst monster, Player player)
         {
-            int _action = MonsterSpawner.RandomNumber(1, 3);//Picks from these numbers to choose an action for the monster
-            switch (_action)
+            int action = MonsterSpawner.RandomNumber(1, 3);//Picks from these numbers to choose an action for the monster
+            switch (action)
             {
                 case 1:
-                    Attack(_monster,player);
+                    Attack(monster,player);
                     break;
                 case 2:
-                    Heal(_monster,player);
+                    Heal(monster,player);
                     break;
                 default:
-                    Console.WriteLine($"{_monster.Name} decided to do nothing!");
+                    Console.WriteLine($"{monster.Name} decided to do nothing!");
                     break;
             }
-            static void Attack(MonsterConst _monster, Player player)
-            {
-                Console.WriteLine($"{_monster.Name} Attacks!");
-
-                int _monsterDamage = MonsterSpawner.RandomNumber(_monster.MinimumAttackDamage, _monster.MaximumAttackDamage);
-                player.HitPoints -= _monsterDamage;
-
-                Console.WriteLine($"{_monster.Name} Dealt: {_monsterDamage} to player");
-            }
-            
-            static void Heal(MonsterConst _monster, Player player)
-            {
-                if (_monster.HitPoints < _monster.MaximumHealth + 1)
+            static void Attack(MonsterConst monster, Player player)
                 {
-                    Console.WriteLine($"{_monster.Name} Heals!");
+                Console.WriteLine($"{monster.Name} Attacks!");
 
-                    int _monsterHealAmount = MonsterSpawner.RandomNumber(_monster.MinimumHeal, _monster.MaximumHeal);
-                    _monster.HitPoints += _monsterHealAmount;
+                int monsterDamage = MonsterSpawner.RandomNumber(monster.MinimumAttackDamage, monster.MaximumAttackDamage);
+                player.HitPoints -= monsterDamage;
 
-                    Console.WriteLine($"{_monster.Name} healed for {_monsterHealAmount}HP");
+                Console.WriteLine($"{monster.Name} Dealt: {monsterDamage} to player");
+                 }
+            
+            static void Heal(MonsterConst monster, Player player)
+            {
+                if (monster.HitPoints < monster.MaximumHealth+ 1 /2)
+                {
+                    Console.WriteLine($"{monster.Name} Heals!");
 
-                    if (_monster.HitPoints > _monster.MaximumHealth)
+                    int monsterHealAmount = MonsterSpawner.RandomNumber(monster.MinimumHeal, monster.MaximumHeal);
+                    monster.HitPoints += monsterHealAmount;
+
+                    Console.WriteLine($"{monster.Name} healed for {monsterHealAmount}HP");
+
+                    if (monster.HitPoints > monster.MaximumHealth)
                     {
-                        _monster.HitPoints = _monster.MaximumHealth;
+                        monster.HitPoints = monster.MaximumHealth;
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"{_monster.Name} wanted to heal but it's too healthy so it decided to Attack!");
+                    Console.WriteLine($"{monster.Name} wanted to heal but it's too healthy so it decided to Attack!");
 
-                    int _monsterDamageOverHeal = MonsterSpawner.RandomNumber(_monster.MinimumAttackDamage, _monster.MaximumAttackDamage);
-                    player.HitPoints -= _monsterDamageOverHeal;
+                    int monsterDamageOverHeal = MonsterSpawner.RandomNumber(monster.MinimumAttackDamage, monster.MaximumAttackDamage);
+                    player.HitPoints -= monsterDamageOverHeal;
 
-                    Console.WriteLine($"{_monster.Name} Dealt: {_monsterDamageOverHeal} to player");
+                    Console.WriteLine($"{monster.Name} Dealt: {monsterDamageOverHeal} to player");
                 }
             }
+
         }
         
     }

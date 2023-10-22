@@ -27,7 +27,7 @@ namespace TurnBasedGame
                         new MonsterConst("Troll", 25, 12,15, 8, 12,25,15,10);
                     return Troll;
                 case 4:
-                    MonsterConst flyingEagle = new MonsterConst("Flying Eagle", 12, 7, 13, 4, 5, 12, 9,30);
+                    MonsterConst flyingEagle = new MonsterConst("Giant Flying Eagle", 12, 7, 13, 4, 5, 12, 9,30);
                     return flyingEagle;
                 default:
                     throw new ArgumentException(String.Format("MonsterType '{0}' does not exist", monsterID));
