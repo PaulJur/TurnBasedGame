@@ -16,18 +16,18 @@ namespace TurnBasedGame
             {
                 case 1:
                     MonsterConst Goblin =
-                        new MonsterConst("Goblin", 10, 5, 8, 3, 5,10,5);
+                        new MonsterConst("Goblin", 10, 5, 8, 3, 5,10,5,20);
                     return Goblin;
                 case 2:
                     MonsterConst Orc =
-                        new MonsterConst("Orc", 15, 8,10, 7, 10,15,10);
+                        new MonsterConst("Orc", 15, 8,10, 7, 10,15,10,15);
                     return Orc;
                 case 3:
                     MonsterConst Troll =
-                        new MonsterConst("Troll", 25, 12,15, 8, 12,25,15);
+                        new MonsterConst("Troll", 25, 12,15, 8, 12,25,15,10);
                     return Troll;
                 case 4:
-                    MonsterConst flyingEagle = new MonsterConst("Flying Eagle", 12, 7, 13, 4, 5, 12, 9);
+                    MonsterConst flyingEagle = new MonsterConst("Flying Eagle", 12, 7, 13, 4, 5, 12, 9,30);
                     return flyingEagle;
                 default:
                     throw new ArgumentException(String.Format("MonsterType '{0}' does not exist", monsterID));

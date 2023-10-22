@@ -11,98 +11,108 @@ namespace TurnBasedGame
     public class MonsterConst
     {
         #region Variables
-        private string _name;
-        private int _hitPoints;
-        private int _minimumAttackDamage;
-        private int _maximumAttackDamage;
-        private int _minimumHeal;
-        private int _maximumHeal;
-        private int _maximumHealth;
-        private int _experienceDrop;
+        private string name;
+        private int hitPoints;
+        private int minimumAttackDamage;
+        private int maximumAttackDamage;
+        private int minimumHeal;
+        private int maximumHeal;
+        private int maximumHealth;
+        private int experienceDrop;
+        private int dodgeChance;
         #endregion
 
         public string Name
         {
-            get { return _name; }
+            get { return name; }
             set
             {
-                _name = value;
+                name = value;
             }
 
         }
         public int HitPoints
         {
-            get { return _hitPoints; }
+            get { return hitPoints; }
             set
             {
-                _hitPoints = value;
+                hitPoints = value;
             }
         }
 
         public int MinimumAttackDamage
         {
-            get { return _minimumAttackDamage; }
+            get { return minimumAttackDamage; }
             set
             {
-                _minimumAttackDamage = value;
+                minimumAttackDamage = value;
             }
         }
 
         public int MaximumAttackDamage
         {
-            get { return _maximumAttackDamage; }
+            get { return maximumAttackDamage; }
             set 
             { 
-                _maximumAttackDamage= value;
+                maximumAttackDamage= value;
             }
         }
 
         public int MinimumHeal
         {
-            get { return _minimumHeal; }
+            get { return minimumHeal; }
             set 
             {
-             _minimumHeal= value;
+             minimumHeal= value;
             }
         }
 
         public int MaximumHeal
         {
-            get { return _maximumHeal; }
+            get { return maximumHeal; }
             set
             {
-                _maximumHeal = value;
+                maximumHeal = value;
             }
         }
 
         public int MaximumHealth
         {
-            get { return _maximumHealth; }
+            get { return maximumHealth; }
             set
             {
-                _maximumHealth= value;
+                maximumHealth= value;
             }
         }
 
-        public int experienceDrop
+        public int ExperienceDrop
         {
-            get { return _experienceDrop; }
+            get { return experienceDrop; }
             set
             {
-                _experienceDrop= value;
+                experienceDrop= value;
             }
         }
 
-        public MonsterConst(string name, int hitPoints, int minAttackDamage,int maxAttackDamge, int minmumheal, int maximumHeal, int maximumHealth,int experienceDrop)
+        public int DodgeChance
         {
-            _name = name;
-            _hitPoints = hitPoints;
-            _minimumAttackDamage = minAttackDamage;
-            _maximumAttackDamage = maxAttackDamge;
-            _minimumHeal = minmumheal;
-            _maximumHeal = maximumHeal;
-            _maximumHealth = maximumHealth;
-            _experienceDrop = experienceDrop;
+            get { return dodgeChance; }
+            set
+            {
+                dodgeChance = value;
+            }
+        }
+        public MonsterConst(string name, int hitPoints, int minAttackDamage,int maxAttackDamge, int minmumheal, int maximumHeal, int maximumHealth,int xpDrop, int dodgeChance)
+        {
+            this.name = name;
+            this.hitPoints = hitPoints;
+            this.minimumAttackDamage = minAttackDamage;
+            this.maximumAttackDamage = maxAttackDamge;
+            this.minimumHeal = minmumheal;
+            this.maximumHeal = maximumHeal;
+            this.maximumHealth = maximumHealth;
+            this.experienceDrop = xpDrop;
+            this.dodgeChance= dodgeChance;
         }
         public bool Dodge(int dodgeChance)
         {

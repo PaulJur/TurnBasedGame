@@ -33,7 +33,7 @@ namespace TurnBasedCombat
 
             while (true)
             {
-                int randomMonsterID = MonsterSpawner.RandomNumber(4,4);
+                int randomMonsterID = MonsterSpawner.RandomNumber(1,4);
                 MonsterConst randomMonster = MonsterSpawner.GetMonster(randomMonsterID);
                 MonsterItemDrop monsterItemDrop = new MonsterItemDrop();
 
@@ -58,9 +58,9 @@ namespace TurnBasedCombat
                     {
                         player.AttackDamage = MonsterSpawner.RandomNumber(player.minimumDamage, player.maximumDamage);
 
-                        if (randomMonsterID == 4)//dodging for the flying eagle monster set for 20%.
+                        if (randomMonster!=null)//dodging for the flying eagle and goblin monster set for 20%.
                             {
-                                bool didDodge = randomMonster.Dodge(20);
+                                bool didDodge = randomMonster.Dodge(randomMonster.DodgeChance);
 
                                 if (didDodge)
                                 {
@@ -77,7 +77,7 @@ namespace TurnBasedCombat
                                 counter = 0;
                                 monsterItemDrop.Drop(randomMonster, player, inventory);
                                 Console.WriteLine($"{randomMonster.Name} Killed!");
-                                player.PlayerExperienceGain(randomMonster.experienceDrop);
+                                player.PlayerExperienceGain(randomMonster.ExperienceDrop);
 
                                 Thread.Sleep(1000);
                                 break;
