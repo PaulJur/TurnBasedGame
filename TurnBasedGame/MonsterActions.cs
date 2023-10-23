@@ -12,16 +12,22 @@ namespace TurnBasedGame
         
         public static void MonsterTakingAction(MonsterConst monster, Player player)
         {
+            bool isDefending=false;
             int action = MonsterSpawner.RandomNumber(1, 3);//Picks from these numbers to choose an action for the monster
             switch (action)
             {
                 case 1:
+                    isDefending = false;
                     Attack(monster,player);
                     break;
                 case 2:
+                    isDefending = false;
+                    //set hp to real hp
                     Heal(monster,player);
                     break;
                 default:
+                    isDefending = true;
+                    Defend(monster, player, isDefending);
                     Console.WriteLine($"{monster.Name} decided to do nothing!");
                     break;
             }
@@ -62,7 +68,26 @@ namespace TurnBasedGame
                 }
             }
 
-        }
+            static void Defend(MonsterConst monster, Player player, bool isDefending)
+            {
+                int monsterHealth = monster.HitPoints;
+
+                int currentTempHp = MonsterSpawner.RandomNumber(1, 10);
+
+                if(isDefending)
+                {
+                    Console.WriteLine($"{monster.Name} is defending and gained {currentTempHp} of temporary hp!");
+                    monster.HitPoints += currentTempHp;
+                    isDefending = false;
+                }
+                else if(isDefending==false)
+                {
+                    monster.HitPoints = monsterHealth;
+                }
+
+            }
+
+        }   
         
     }
 
