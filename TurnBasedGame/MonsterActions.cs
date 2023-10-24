@@ -9,10 +9,10 @@ namespace TurnBasedGame
 {
     public class MonsterActions
     {
-        
+        static List<int>? tempHpList = new List<int>();
         public static void MonsterTakingAction(MonsterConst monster, Player player)
         {
-            List<int>? tempHpList = new List<int>();
+            
             bool _isDefending=false;
             int action = MonsterSpawner.RandomNumber(1, 3);//Picks from these numbers to choose an action for the monster
             switch (action)
@@ -28,7 +28,7 @@ namespace TurnBasedGame
                     Heal(monster,player);
                     break;
                 default:
-                    _isDefending=false;
+                    _isDefending =false;
                     Defend(monster, player, _isDefending);
                     _isDefending = true;
                     Defend(monster, player, _isDefending);
@@ -46,7 +46,7 @@ namespace TurnBasedGame
             
             static void Heal(MonsterConst monster, Player player)
             {
-                if (monster.HitPoints < monster.MaximumHealth+ 1 /2)
+                if (monster.HitPoints < monster.MaximumHealth+1 /2)
                 {
                     Console.WriteLine($"{monster.Name} Heals!");
 
@@ -79,21 +79,20 @@ namespace TurnBasedGame
                 {
 
                     int currentTempHp = MonsterSpawner.RandomNumber(1, 10);
-                    tempHpList.Add(currentTempHp);
-                    Console.WriteLine(tempHpList[0] + "HP IN LIST");
-                    Console.WriteLine(tempHpList.Count + "COUNT HERE");
+                    tempHpList?.Add(currentTempHp);
                     Console.WriteLine($"{monster.Name} is defending and gained {currentTempHp} of temporary hp!");
                     monster.HitPoints += tempHpList[0];
                     isDefending = false;
+                    //Randomizes temporary hp variable and adds it to a list which then adds the number to the monsters hp.
+
                 }
-                else if(_isDefending==false && tempHpList.Count!=0)//temphplist.count still does not work??
+                else if(_isDefending==false && tempHpList?.Count > 0)
                 {
-                    Console.WriteLine("WORKS");
                     monster.HitPoints -= tempHpList[0];
                     Console.WriteLine($"Removed {tempHpList[0]} HP from enemy monster");
-                    tempHpList.RemoveAt(1);
-                    Console.WriteLine($"{tempHpList.Count} COUNT AFTER REMOVE");
-
+                    tempHpList.RemoveAt(0);
+                    //When the monster is no longer defending and takes another action, the saved element in the list is subtracted 
+                    //from the monsters hp.
                 }
 
 

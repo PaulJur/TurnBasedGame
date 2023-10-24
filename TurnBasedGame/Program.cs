@@ -73,7 +73,7 @@ namespace TurnBasedCombat
                             //The monster will "dodge", setting the player damage to 0.
                         }
 
-                        Console.WriteLine($"{player.Name} DEALT {player.AttackDamage} To {randomMonster.Name}!\n");
+                        Console.WriteLine($"{player.Name} DEALT {player.AttackDamage} To {randomMonster?.Name}!\n");
 
                         randomMonster.HitPoints -= player.AttackDamage;
                         if (randomMonster.HitPoints <= 0)//If the monsters HP reaches <=0 player gets experience and if the player reaches the threshold they level up resetting xp to 0
@@ -101,6 +101,7 @@ namespace TurnBasedCombat
 
                         if (choice == "h")
                         {
+                            Console.Clear();
 
                             if (player.HitPoints < player.maximumHitPoints / 2)
                             // Healing not allowed until the player is below half hp
