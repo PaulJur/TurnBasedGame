@@ -97,7 +97,7 @@ namespace TurnBasedCombat
 
                         Thread.Sleep(1500);
                         MonsterActions.MonsterTakingAction(randomMonster, player);
-
+                    }
 
                         if (choice == "h")
                         {
@@ -122,7 +122,7 @@ namespace TurnBasedCombat
                             else { Console.Clear(); Console.WriteLine("You are too healthy to heal!"); Console.WriteLine(" "); }
 
                         }
-
+                    
                         if (choice == "help")
                         {
                             Console.Clear();
@@ -164,7 +164,7 @@ namespace TurnBasedCombat
                             player.UsePotion(healingPotion);
                             inventory.RemoveItem(healingPotion);
                         }
-                    }
+                    
 
                 }
             }

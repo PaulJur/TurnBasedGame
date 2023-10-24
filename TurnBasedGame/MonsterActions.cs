@@ -12,23 +12,26 @@ namespace TurnBasedGame
         
         public static void MonsterTakingAction(MonsterConst monster, Player player)
         {
-            bool isDefending=false;
+            List<int>? tempHpList = new List<int>();
+            bool _isDefending=false;
             int action = MonsterSpawner.RandomNumber(1, 3);//Picks from these numbers to choose an action for the monster
             switch (action)
             {
                 case 1:
-                    isDefending = false;
+                    _isDefending = false;
+                    Defend(monster,player,_isDefending);
                     Attack(monster,player);
                     break;
                 case 2:
-                    isDefending = false;
-                    //set hp to real hp
+                    _isDefending = false;
+                    Defend(monster, player, _isDefending);
                     Heal(monster,player);
                     break;
                 default:
-                    isDefending = true;
-                    Defend(monster, player, isDefending);
-                    Console.WriteLine($"{monster.Name} decided to do nothing!");
+                    _isDefending=false;
+                    Defend(monster, player, _isDefending);
+                    _isDefending = true;
+                    Defend(monster, player, _isDefending);
                     break;
             }
             static void Attack(MonsterConst monster, Player player)
@@ -68,25 +71,34 @@ namespace TurnBasedGame
                 }
             }
 
-            static void Defend(MonsterConst monster, Player player, bool isDefending)
+            void Defend(MonsterConst monster, Player player, bool isDefending)
             {
-                int monsterHealth = monster.HitPoints;
+                _isDefending = isDefending;
 
-                int currentTempHp = MonsterSpawner.RandomNumber(1, 10);
-
-                if(isDefending)
+                if (_isDefending)
                 {
+
+                    int currentTempHp = MonsterSpawner.RandomNumber(1, 10);
+                    tempHpList.Add(currentTempHp);
+                    Console.WriteLine(tempHpList[0] + "HP IN LIST");
+                    Console.WriteLine(tempHpList.Count + "COUNT HERE");
                     Console.WriteLine($"{monster.Name} is defending and gained {currentTempHp} of temporary hp!");
-                    monster.HitPoints += currentTempHp;
+                    monster.HitPoints += tempHpList[0];
                     isDefending = false;
                 }
-                else if(isDefending==false)
+                else if(_isDefending==false && tempHpList.Count!=0)//temphplist.count still does not work??
                 {
-                    monster.HitPoints = monsterHealth;
+                    Console.WriteLine("WORKS");
+                    monster.HitPoints -= tempHpList[0];
+                    Console.WriteLine($"Removed {tempHpList[0]} HP from enemy monster");
+                    tempHpList.RemoveAt(1);
+                    Console.WriteLine($"{tempHpList.Count} COUNT AFTER REMOVE");
+
                 }
 
-            }
 
+            }
+                
         }   
         
     }
