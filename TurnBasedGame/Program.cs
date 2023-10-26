@@ -22,7 +22,7 @@ namespace TurnBasedCombat
 
 
             var counter = 0;
-            Player player = new Player("Chad", 5000, 5000, 4, 11, 6, 8, 0, 0);
+            Player player = new Player("Chad", 5000, 5000, 4, 11, 3, 6, 0, 0);
             
 
             Console.WriteLine("Game made by Paulius Jurgelis\n");
@@ -38,7 +38,7 @@ namespace TurnBasedCombat
             while (true)
             {
 
-                int randomMonsterID = MonsterSpawner.RandomNumber(1, 4);
+                int randomMonsterID = MonsterSpawner.RandomNumber(1, 15);
                 MonsterConst randomMonster = MonsterSpawner.GetMonster(randomMonsterID);
                 MonsterItemDrop monsterItemDrop = new MonsterItemDrop();
 

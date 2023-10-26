@@ -31,8 +31,7 @@ namespace TurnBasedGame
                     Heal(monster,player);
 
                     break;
-                default: //!!!!!!!!!!Need to add another mechanics here where either it has some of the temp hp added to the hp pool 
-                    //or another action, maybe a potential parry or attack or something.
+                default:
                     _isDefending = false;
                     Defend(monster, player, _isDefending);
 
@@ -53,7 +52,7 @@ namespace TurnBasedGame
             
             static void Heal(MonsterConst monster, Player player)
             {
-                if (monster.HitPoints < monster.MaximumHealth+1 /2)
+                if (monster.HitPoints < monster.MaximumHealth/2)
                 {
                     Console.WriteLine($"{monster.Name} Heals!");
 
@@ -97,10 +96,21 @@ namespace TurnBasedGame
                 {
                     monster.HitPoints -= tempHpList[0];
                     Console.WriteLine($"Removed {tempHpList[0]} HP from enemy monster");
+                    int addedHitPoints = tempHpList[0] / 2;
+
+                    monster.HitPoints += addedHitPoints;
+
+                    //Monsters will gain half of their temporary hp after it gets removed.
+                    if(monster.HitPoints > monster.MaximumHealth) 
+                    {
+                        monster.HitPoints = monster.MaximumHealth;
+                    }
+
+                    Console.WriteLine($"Monster gained {addedHitPoints} as hitpoints! Now at {monster.HitPoints}");
 
                     if (monster.HitPoints == 0 || monster.HitPoints - tempHpList[0] == 0)
                     {
-                        Console.WriteLine($"{monster.Name} is defending with it's last energy!");
+                        Console.WriteLine($"{monster.Name} is taking action with it's last energy!");
                     }
 
                     tempHpList.RemoveAt(0);
