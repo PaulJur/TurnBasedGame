@@ -9,28 +9,27 @@ namespace TurnBasedGame
 {
     public static class MonsterSpawner
     {
+
         private static readonly Random _simpleGenerator = new Random();
-        public static MonsterConst GetMonster(int monsterID)//a list of monsters that have their own ID and will be generated each encounter
+        public static MonsterConst GetMonster(int monsterID, int playerLevel)//a list of monsters that have their own ID and will be generated each encounter
         {
-            switch(monsterID)
+            double levelMultiplier = CalculateLevelMultiplier(playerLevel);
+
+            switch (monsterID)
             {
+
                 case 1:
-                    MonsterConst Goblin =
-                        new MonsterConst("Goblin", 10, 5, 8, 3, 5,10,5,20);
-                    return Goblin;
+                    return MonsterFactory.CreateGoblin(levelMultiplier);
                 case 2:
-                    MonsterConst Orc =
-                        new MonsterConst("Orc", 15, 8,10, 7, 10,15,10,15);
-                    return Orc;
+                    return MonsterFactory.CreateOrc(levelMultiplier);
                 case 3:
-                    MonsterConst Troll =
-                        new MonsterConst("Troll", 25, 12,15, 8, 12,25,15,10);
-                    return Troll;
+                    return MonsterFactory.CreateTroll(levelMultiplier);
                 case 4:
-                    MonsterConst flyingEagle = new MonsterConst("Giant Flying Eagle", 12, 7, 13, 4, 5, 12, 9,30);
-                    return flyingEagle;
+                    return MonsterFactory.CreateFlyingEagle(levelMultiplier);
+                case 95:
+                    return MonsterFactory.CreateOrcBoss();
                 default:
-                    return Goblin = new MonsterConst("Goblin", 10, 5, 8, 3, 5, 10, 5, 20);
+                    return MonsterFactory.CreateGoblin(levelMultiplier);
 
             }
 
@@ -41,7 +40,16 @@ namespace TurnBasedGame
             return _simpleGenerator.Next(minimumValue, maximumValue + 1);
         }
 
+        private static double CalculateLevelMultiplier(int playerLevel)
+        {
 
+            int levelReached = (playerLevel - 1) / 5;
+            double levelMultiplier = 0.3;
+
+            double totalMultiplier =  Math.Pow(1 + levelMultiplier,levelReached); //every 5 levels, to the power of 1.2^0.2 
+
+            return totalMultiplier;
+        }
 
     }
 }

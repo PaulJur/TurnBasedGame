@@ -20,9 +20,9 @@ namespace TurnBasedCombat
             Inventory inventory = new Inventory();
 
 
-
+            bool orcBossKilled = false;
             var counter = 0;
-            Player player = new Player("Chad", 5000, 5000, 4, 11, 3, 6, 0, 0);
+            Player player = new Player("Chad", 5000, 5000, 4, 11, 200, 200, 0, 0); //4 6 attack
             
 
             Console.WriteLine("Game made by Paulius Jurgelis\n");
@@ -30,20 +30,28 @@ namespace TurnBasedCombat
             Console.WriteLine("You can quit anytime if you write q, enjoy\n");
             Thread.Sleep(1500);
             Console.WriteLine("------------------------------------------------------");
-
+            player.Level = 4;
             Console.WriteLine("Please enter your characters name:");
             player.Name = Console.ReadLine();
             Console.Clear();
+
 
             while (true)
             {
 
                 int randomMonsterID = MonsterSpawner.RandomNumber(1, 15);
-                MonsterConst randomMonster = MonsterSpawner.GetMonster(randomMonsterID);
+                if (player.Level == 5 && orcBossKilled == false)
+                {
+                    randomMonsterID = 95;
+                }
+                MonsterConst randomMonster = MonsterSpawner.GetMonster(randomMonsterID,player.Level);
                 MonsterItemDrop monsterItemDrop = new MonsterItemDrop();
+
+               
 
                 while (player.HitPoints > 0 && randomMonster.HitPoints > 0)
                 {
+                    
 
                     counter++;
                     if (counter <= 1)
@@ -96,6 +104,11 @@ namespace TurnBasedCombat
                             monsterItemDrop.Drop(randomMonster, player, inventory);
                             Console.WriteLine($"{randomMonster.Name} Killed!\n");
                             player.PlayerExperienceGain(randomMonster.ExperienceDrop);
+
+                            if(randomMonsterID == 95)
+                            {
+                                orcBossKilled = true;
+                            }
 
                             Thread.Sleep(1000);
                             break;
