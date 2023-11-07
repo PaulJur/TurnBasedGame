@@ -147,11 +147,11 @@ namespace TurnBasedGame
             HitPoints += maximumHitPoints/3;
             maximumHitPoints += 5;
             minimumDamage = (int)Math.Round(minimumDamage * 1.1);
-            maximumDamage = (int)Math.Round(maximumDamage * 1.1);
+            maximumDamage = (int)Math.Round(maximumDamage * 1.15);
             minimumHeal = (int)Math.Round(minimumHeal * 1.1);
-            maximumHeal = (int)Math.Round(maximumHeal * 1.1);
+            maximumHeal = (int)Math.Round(maximumHeal * 1.15);
             Experience = 0;
-            experienceRequired = (int)Math.Round(experienceRequired * 1.8);
+            experienceRequired = (int)Math.Round(experienceRequired * 1.7);
             Console.WriteLine("You have Leveled up!");
         }
 

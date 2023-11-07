@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using TurnBasedGame;
 using System.Threading;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace TurnBasedCombat
 {
@@ -16,7 +17,6 @@ namespace TurnBasedCombat
     {
         static void Main(string[] args)
         {
-
             Inventory inventory = new Inventory();
 
 
@@ -30,12 +30,10 @@ namespace TurnBasedCombat
             Console.WriteLine("You can quit anytime if you write q, enjoy\n");
             Thread.Sleep(1500);
             Console.WriteLine("------------------------------------------------------");
-            player.Level = 4;
             Console.WriteLine("Please enter your characters name:");
+
             player.Name = Console.ReadLine();
-            Console.Clear();
-
-
+            
             while (true)
             {
 
@@ -157,6 +155,7 @@ namespace TurnBasedCombat
                             Console.WriteLine("You can only heal below half of your hp\n");
                             Console.WriteLine("Write 'inventory' to show your inventory\n");
                             Console.WriteLine("Write 'potion' to use one of your healing potions");
+                            Console.WriteLine("You can type 'save' to save your game and 'load' to load your game state");
                             Console.WriteLine("------------------------------------------------------");
                         }
 
@@ -193,7 +192,20 @@ namespace TurnBasedCombat
                             player.UsePotion(healingPotion);
                             inventory.RemoveItem(healingPotion);
                         }
-                    
+
+                        if (choice == "save")
+                        {
+                            DataSaveAndLoad.SaveGame(player, randomMonster);
+                            Console.WriteLine("Game saved successfully");
+                            continue;
+                        }
+                        
+                        if (choice == "load")
+                        {
+                            DataSaveAndLoad.LoadGame();
+                            Console.WriteLine("Game loaded successfully");
+                            continue;
+                        }
 
                 }
             }
