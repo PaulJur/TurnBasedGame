@@ -5,29 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace TurnBasedGame
 {
-    internal class SaveData
-    {
-        internal Player Player { get; set; }
-        internal MonsterConst MonsterConst { get; set; }
-
-        internal SaveData(Player player, MonsterConst currentMonster) 
-        {
-            Player = player;
-            MonsterConst = currentMonster;
-        }
-    }
-
-
+    
     public static class DataSaveAndLoad
     {
-
-        public static void SaveGame(Player player, MonsterConst currentMonster)
+        internal class SaveData
         {
-            var saveData = new SaveData(player, currentMonster);
-            string jsonData = JsonSerializer.Serialize(saveData);
+            public Player Player { get; set; }
+            public MonsterConst MonsterConst { get; set; }
+
+            [JsonConstructor]
+            public SaveData(Player player, MonsterConst currentMonster)
+            {
+                Player = player;
+                MonsterConst = currentMonster;
+            }
+        }
+
+        public static void SaveGame(Player currentPlayer, MonsterConst currentMonster)
+        {
+            var saveData = new SaveData(currentPlayer, currentMonster);
+            var options = new JsonSerializerOptions { IncludeFields = true };
+            var jsonData = JsonSerializer.Serialize(saveData,options);
+            Console.WriteLine(jsonData);
 
             File.WriteAllText("save.json", jsonData);
         }
@@ -37,7 +40,8 @@ namespace TurnBasedGame
             if (File.Exists("save.json"))
             {
                 string jsonData = File.ReadAllText("save.json");
-                SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonData);
+                var options = new JsonSerializerOptions { IncludeFields = true };
+                SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonData,options);
 
                 return (saveData.Player, saveData.MonsterConst);
             }

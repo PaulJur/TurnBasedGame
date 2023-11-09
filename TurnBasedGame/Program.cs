@@ -22,7 +22,7 @@ namespace TurnBasedCombat
 
             bool orcBossKilled = false;
             var counter = 0;
-            Player player = new Player("Chad", 5000, 5000, 4, 11, 200, 200, 0, 0); //4 6 attack
+            Player player = new Player("Chad", 5000, 5000, 4, 11, 4, 6, 0, 0,0); //4 6 attack
             
 
             Console.WriteLine("Game made by Paulius Jurgelis\n");
@@ -128,13 +128,14 @@ namespace TurnBasedCombat
                         {
                             Console.Clear();
 
-                            if (player.HitPoints < player.maximumHitPoints / 2)
+                            if (player.HitPoints < player.MaximumHp / 2)
                             // Healing not allowed until the player is below half hp
                             {
                                 for (int i = 1; i <= 1; i++)
                                 {
-                                    player.Heal = MonsterSpawner.RandomNumber(player.minimumHeal, player.maximumHeal);
+                                    player.Heal = MonsterSpawner.RandomNumber(player.MinimumHeal, player.MaximumHeal);
                                 }
+
                                 player.HitPoints += player.Heal;
                                 Console.WriteLine("Healed for: " + player.Heal + " HP" + " Current Health: " + player.HitPoints);//Player heals for an amount
 
@@ -171,13 +172,13 @@ namespace TurnBasedCombat
                         {
                             Console.Clear();
                             Console.WriteLine($"Name: {player.Name}");
-                            Console.WriteLine($"Current XP: {player.Experience}");
+                            Console.WriteLine($"Current XP: {player.ExperienceAmount}");
                             Console.WriteLine($"Required XP to level up: {player.experienceRequired}");
                             Console.WriteLine($"Current Level: {player.Level}\n");
                             Console.WriteLine("STATS\n");
-                            Console.WriteLine($"Your Damage: Minimum {player.minimumDamage} to Maximum {player.maximumDamage}");
-                            Console.WriteLine($"Your Heal: Minimum {player.minimumHeal} to Maximum {player.maximumHeal}");
-                            Console.WriteLine($"Your Maximum HP: {player.maximumHitPoints}");
+                            Console.WriteLine($"Your Damage: Minimum {player.MinimumDamage} to Maximum {player.MaximumDamage}");
+                            Console.WriteLine($"Your Heal: Minimum {player.MinimumHeal} to Maximum {player.MaximumHeal}");
+                            Console.WriteLine($"Your Maximum HP: {player.MaximumHp}");
                             Console.WriteLine("------------------------------------------------------");
                         }
 
@@ -195,7 +196,7 @@ namespace TurnBasedCombat
 
                         if (choice == "save")
                         {
-                            DataSaveAndLoad.SaveGame(player, randomMonster);
+                            DataSaveAndLoad.SaveGame(player,randomMonster);
                             Console.WriteLine("Game saved successfully");
                             continue;
                         }
@@ -206,6 +207,7 @@ namespace TurnBasedCombat
                             Console.WriteLine("Game loaded successfully");
                             continue;
                         }
+
 
                 }
             }
