@@ -15,7 +15,6 @@ namespace TurnBasedGame
         private string name;
         private int hitPoints;
         private int attackDamage;
-        private int heal;
         private int maximumHeal;
         private int minimumHeal;
         private int maximumDamage;
@@ -25,7 +24,7 @@ namespace TurnBasedGame
         private int experience;
         private int level;
 
-        public int experienceRequired = 10;
+        private int experienceRequired = 10;
         #endregion
 
         public String Name
@@ -44,21 +43,46 @@ namespace TurnBasedGame
                 hitPoints = value;
             }
         }
-        public int AttackDamage
+        public int MaximumHp
         {
-            get { return attackDamage; }
+            get { return maximumHitPoints; }
             set
             {
-                attackDamage = value;
+                maximumHitPoints = value;
             }
         }
-        public int Heal
+        public int MinimumHeal
         {
-            get { return heal; }
+            get { return minimumHeal; }
             set
             {
-                heal = value;
+                minimumHeal = value;
             }
+        }
+        public int MaximumHeal
+        {
+            get { return maximumHeal; }
+            set
+            {
+                maximumHeal = value;
+            }
+        }
+        public int MinimumDamage
+        {
+            get { return minimumDamage; }
+            set
+            {
+                minimumDamage = value;
+            }
+        }
+        public int MaximumDamage
+        {
+            get { return maximumDamage; }
+            set
+            {
+                maximumDamage = value;
+            }
+
         }
         public int ExperienceAmount
         {
@@ -76,60 +100,36 @@ namespace TurnBasedGame
                 level = value;
             }
         }
-        public int MaximumHeal
+        public int AttackDamage
         {
-            get { return maximumHeal; }
+            get { return attackDamage; }
             set
             {
-                maximumHeal = value;
+                attackDamage = value;
             }
         }
-        public int MinimumHeal
+        public int ExperienceRequired
         {
-            get { return minimumHeal; }
-            set
-            {
-                minimumHeal = value;
-            }
-        }
-        public int MaximumDamage
-        {
-            get { return maximumDamage; }
-            set
-            {
-                maximumDamage = value;
-            }
-
-        }
-        public int MinimumDamage
-        {
-            get { return minimumDamage; }
-            set
-            {
-                minimumDamage = value;
-            }
-        }
-        public int MaximumHp
-        {
-            get { return maximumHitPoints; }
-            set
-            {
-                maximumHitPoints = value;
-            }
+            get { return experienceRequired; }
+            set { experienceRequired = value; }
         }
 
-        public Player(string name, int hitPoints,int maximumHitPoints,int minimumHeal, int maximumHeal, int minimumDamage, int maximumDamage,int experience, int level, int AttackDamage)
+       
+        
+        public Player(string name, int hitPoints,int maximumHitPoints,int minimumHeal, int maximumHeal, int minimumDamage, int maximumDamage,int experienceAmount, int level, int attackDamage,int experienceRequired)
         {
-            this.name = name;
-            this.hitPoints = hitPoints;
-            this.maximumHitPoints = maximumHitPoints;
-            this.maximumHeal = maximumHeal;
-            this.minimumHeal = minimumHeal;
-            this.maximumDamage = maximumDamage;
-            this.minimumDamage = minimumDamage;
-            this.experience = experience;
-            this.level = level;
-            this.AttackDamage = AttackDamage;
+            Name = name;
+            HitPoints = hitPoints;
+            MaximumHp = maximumHitPoints;
+            ExperienceAmount = experience;
+            MinimumHeal = minimumHeal;
+            MaximumHeal = maximumHeal;
+            MaximumDamage = maximumDamage;
+            MinimumDamage = minimumDamage;
+            ExperienceAmount = experienceAmount;
+            Level = level;
+            AttackDamage = attackDamage;
+            ExperienceRequired = experienceRequired;
         }
 
         public void PlayerExperienceGain(int _monsterExperienceDrop)//When monster is killed experience gets added to the player and they level up

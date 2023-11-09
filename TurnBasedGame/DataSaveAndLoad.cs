@@ -14,22 +14,21 @@ namespace TurnBasedGame
     {
         internal class SaveData
         {
-            public Player Player { get; set; }
-            public MonsterConst MonsterConst { get; set; }
+            public Player player { get; set; }
+            public MonsterConst monsterConst { get; set; }
 
             [JsonConstructor]
-            public SaveData(Player player, MonsterConst currentMonster)
+            public SaveData(Player player, MonsterConst monsterConst)
             {
-                Player = player;
-                MonsterConst = currentMonster;
+                this.player = player;
+                this.monsterConst = monsterConst;
             }
         }
 
-        public static void SaveGame(Player currentPlayer, MonsterConst currentMonster)
+        public static void SaveGame(Player player, MonsterConst monsterConst)
         {
-            var saveData = new SaveData(currentPlayer, currentMonster);
-            var options = new JsonSerializerOptions { IncludeFields = true };
-            var jsonData = JsonSerializer.Serialize(saveData,options);
+            var saveData = new SaveData(player, monsterConst);
+            var jsonData = JsonSerializer.Serialize(saveData);
             Console.WriteLine(jsonData);
 
             File.WriteAllText("save.json", jsonData);
@@ -40,10 +39,9 @@ namespace TurnBasedGame
             if (File.Exists("save.json"))
             {
                 string jsonData = File.ReadAllText("save.json");
-                var options = new JsonSerializerOptions { IncludeFields = true };
-                SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonData,options);
+                SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonData);
 
-                return (saveData.Player, saveData.MonsterConst);
+                return (saveData.player, saveData.monsterConst);
             }
             else
             {

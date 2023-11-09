@@ -104,15 +104,15 @@ namespace TurnBasedGame
         }
         public MonsterConst(string name, int hitPoints, int minAttackDamage,int maxAttackDamge, int minmumheal, int maximumHeal, int maximumHealth,int xpDrop, int dodgeChance)
         {
-            this.name = name;
-            this.hitPoints = hitPoints;
-            this.minimumAttackDamage = minAttackDamage;
-            this.maximumAttackDamage = maxAttackDamge;
-            this.minimumHeal = minmumheal;
-            this.maximumHeal = maximumHeal;
-            this.maximumHealth = maximumHealth;
-            this.experienceDrop = xpDrop;
-            this.dodgeChance= dodgeChance;
+            Name = name;
+            HitPoints = hitPoints;
+            MinimumAttackDamage = minAttackDamage;
+            MaximumAttackDamage = maxAttackDamge;
+            MinimumHeal = minmumheal;
+            MaximumHeal = maximumHeal;
+            MaximumHealth = maximumHealth;
+            ExperienceDrop = xpDrop;
+            DodgeChance = dodgeChance;
         }
         public bool Dodge(int dodgeChance)
         {

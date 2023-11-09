@@ -15,14 +15,15 @@ namespace TurnBasedCombat
 {
     class MainClass
     {
+
         static void Main(string[] args)
         {
             Inventory inventory = new Inventory();
-
+            int Heal;
 
             bool orcBossKilled = false;
             var counter = 0;
-            Player player = new Player("Chad", 5000, 5000, 4, 11, 4, 6, 0, 0,0); //4 6 attack
+            Player player = new Player("Chad", 5000, 5000, 4, 11, 4, 6, 0, 0,0,10); //4 6 attack
             
 
             Console.WriteLine("Game made by Paulius Jurgelis\n");
@@ -36,7 +37,7 @@ namespace TurnBasedCombat
             
             while (true)
             {
-
+                
                 int randomMonsterID = MonsterSpawner.RandomNumber(1, 15);
                 if (player.Level == 5 && orcBossKilled == false)
                 {
@@ -131,13 +132,10 @@ namespace TurnBasedCombat
                             if (player.HitPoints < player.MaximumHp / 2)
                             // Healing not allowed until the player is below half hp
                             {
-                                for (int i = 1; i <= 1; i++)
-                                {
-                                    player.Heal = MonsterSpawner.RandomNumber(player.MinimumHeal, player.MaximumHeal);
-                                }
-
-                                player.HitPoints += player.Heal;
-                                Console.WriteLine("Healed for: " + player.Heal + " HP" + " Current Health: " + player.HitPoints);//Player heals for an amount
+                                
+                                Heal = MonsterSpawner.RandomNumber(player.MinimumHeal, player.MaximumHeal);
+                                player.HitPoints += Heal;
+                                Console.WriteLine("Healed for: " + Heal + " HP" + " Current Health: " + player.HitPoints);//Player heals for an amount
 
                                 Thread.Sleep(1000);
                                 Console.WriteLine($"{randomMonster.Name}'s Turn!");
@@ -173,7 +171,7 @@ namespace TurnBasedCombat
                             Console.Clear();
                             Console.WriteLine($"Name: {player.Name}");
                             Console.WriteLine($"Current XP: {player.ExperienceAmount}");
-                            Console.WriteLine($"Required XP to level up: {player.experienceRequired}");
+                            Console.WriteLine($"Required XP to level up: {player.ExperienceRequired}");
                             Console.WriteLine($"Current Level: {player.Level}\n");
                             Console.WriteLine("STATS\n");
                             Console.WriteLine($"Your Damage: Minimum {player.MinimumDamage} to Maximum {player.MaximumDamage}");
