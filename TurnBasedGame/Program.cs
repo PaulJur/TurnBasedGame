@@ -31,7 +31,7 @@ namespace TurnBasedCombat
             Console.WriteLine("You can quit anytime if you write q, enjoy\n");
             Thread.Sleep(1500);
             Console.WriteLine("------------------------------------------------------");
-            Console.WriteLine("Please enter your characters name:");
+            Console.WriteLine("Please enter your character's name: ");
 
             player.Name = Console.ReadLine();
             
@@ -129,7 +129,7 @@ namespace TurnBasedCombat
                         {
                             Console.Clear();
 
-                            if (player.HitPoints < player.MaximumHp / 2)
+                            if (player.HitPoints < player.MaximumHitPoints / 2)
                             // Healing not allowed until the player is below half hp
                             {
                                 
@@ -176,34 +176,45 @@ namespace TurnBasedCombat
                             Console.WriteLine("STATS\n");
                             Console.WriteLine($"Your Damage: Minimum {player.MinimumDamage} to Maximum {player.MaximumDamage}");
                             Console.WriteLine($"Your Heal: Minimum {player.MinimumHeal} to Maximum {player.MaximumHeal}");
-                            Console.WriteLine($"Your Maximum HP: {player.MaximumHp}");
+                            Console.WriteLine($"Your Maximum HP: {player.MaximumHitPoints}");
                             Console.WriteLine("------------------------------------------------------");
                         }
-
+                        //Check the Player's inventory
                         if (choice == "inventory")
                         {
                             inventory.ShowInventory();
                         }
-
+                        //The player uses a potion
                         if (choice == "potion")
                         {
                             Items healingPotion = monsterItemDrop.GetHealingPotion();
                             player.UsePotion(healingPotion);
                             inventory.RemoveItem(healingPotion);
                         }
-
+                        //Save the game
                         if (choice == "save")
                         {
                             DataSaveAndLoad.SaveGame(player,randomMonster);
                             Console.WriteLine("Game saved successfully");
                             continue;
                         }
-                        
+                        //Load the game
                         if (choice == "load")
                         {
-                            DataSaveAndLoad.LoadGame();
-                            Console.WriteLine("Game loaded successfully");
-                            continue;
+                            (player, randomMonster) = DataSaveAndLoad.LoadGame();
+
+                            if(player!= null && randomMonster != null)
+                            {
+                            Console.WriteLine("Game loaded successfully!");
+                            }
+
+                            else if(player == null && randomMonster == null)
+                            {
+                                Console.WriteLine("\nPlease enter your character's name:");
+                                string nameChoice = Console.ReadLine();
+                                player = new Player(nameChoice, 5000, 5000, 4, 11, 4, 6, 0, 0, 0, 10);
+                                break;
+                            }
                         }
 
 

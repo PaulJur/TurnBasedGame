@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace TurnBasedGame
@@ -11,7 +12,6 @@ namespace TurnBasedGame
     //Player class for variables and their get; sets;
     public class Player
     {
-        #region PlayerStatVariables
         private string name;
         private int hitPoints;
         private int attackDamage;
@@ -21,13 +21,12 @@ namespace TurnBasedGame
         private int minimumDamage;
         private int maximumHitPoints;
 
-        private int experience;
+        private int experienceAmount;
         private int level;
 
         private int experienceRequired = 10;
-        #endregion
 
-        public String Name
+        public string Name
         {
             get { return name; }
             set
@@ -43,7 +42,7 @@ namespace TurnBasedGame
                 hitPoints = value;
             }
         }
-        public int MaximumHp
+        public int MaximumHitPoints
         {
             get { return maximumHitPoints; }
             set
@@ -86,10 +85,10 @@ namespace TurnBasedGame
         }
         public int ExperienceAmount
         {
-            get { return experience; }
+            get { return experienceAmount; }
             set
             {
-                experience = value;
+                experienceAmount = value;
             }
         }
         public int Level
@@ -120,13 +119,12 @@ namespace TurnBasedGame
         {
             Name = name;
             HitPoints = hitPoints;
-            MaximumHp = maximumHitPoints;
-            ExperienceAmount = experience;
+            MaximumHitPoints = maximumHitPoints;
+            ExperienceAmount = experienceAmount;
             MinimumHeal = minimumHeal;
             MaximumHeal = maximumHeal;
             MaximumDamage = maximumDamage;
             MinimumDamage = minimumDamage;
-            ExperienceAmount = experienceAmount;
             Level = level;
             AttackDamage = attackDamage;
             ExperienceRequired = experienceRequired;

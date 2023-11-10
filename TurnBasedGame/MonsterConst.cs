@@ -10,7 +10,6 @@ namespace TurnBasedGame
     //General variables for the monster class and a constructor
     public class MonsterConst
     {
-        #region Variables
         private string name;
         private int hitPoints;
         private int minimumAttackDamage;
@@ -20,7 +19,6 @@ namespace TurnBasedGame
         private int maximumHealth;
         private int experienceDrop;
         private int dodgeChance;
-        #endregion
 
         public string Name
         {
@@ -39,7 +37,6 @@ namespace TurnBasedGame
                 hitPoints = value;
             }
         }
-
         public int MinimumAttackDamage
         {
             get { return minimumAttackDamage; }
@@ -48,7 +45,6 @@ namespace TurnBasedGame
                 minimumAttackDamage = value;
             }
         }
-
         public int MaximumAttackDamage
         {
             get { return maximumAttackDamage; }
@@ -102,16 +98,16 @@ namespace TurnBasedGame
                 dodgeChance = value;
             }
         }
-        public MonsterConst(string name, int hitPoints, int minAttackDamage,int maxAttackDamge, int minmumheal, int maximumHeal, int maximumHealth,int xpDrop, int dodgeChance)
+        public MonsterConst(string name, int hitPoints, int minimumAttackDamage,int maximumAttackDamage, int minimumheal, int maximumHeal, int maximumHealth,int experienceDrop, int dodgeChance)
         {
             Name = name;
             HitPoints = hitPoints;
-            MinimumAttackDamage = minAttackDamage;
-            MaximumAttackDamage = maxAttackDamge;
-            MinimumHeal = minmumheal;
+            MinimumAttackDamage = minimumAttackDamage;
+            MaximumAttackDamage = maximumAttackDamage;
+            MinimumHeal = minimumheal;
             MaximumHeal = maximumHeal;
             MaximumHealth = maximumHealth;
-            ExperienceDrop = xpDrop;
+            ExperienceDrop = experienceDrop;
             DodgeChance = dodgeChance;
         }
         public bool Dodge(int dodgeChance)

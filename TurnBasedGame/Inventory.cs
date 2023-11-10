@@ -8,26 +8,26 @@ namespace TurnBasedGame
 {
     public class Inventory
     {
-        private List<Items> _items = new List<Items>();
+        private List<Items> Items = new List<Items>();
 
         public void AddItem(Items item)//Adds an item to the List
         {
-            _items.Add(item);
+            Items.Add(item);
         }
 
         public void RemoveItem(Items item)//Removes an item from the list
         {
-            _items.Remove(item);
+            Items.Remove(item);
         }
 
         public void ShowInventory()//Shows all the items in the List to the player
         {
-            foreach (Items item in _items)
+            foreach (Items item in Items)
             {
                 Console.WriteLine(item.Name + ": " + item.Description);
             }
 
-            if(_items.Count <= 0 ) 
+            if(Items.Count <= 0 ) 
             {
                 Console.WriteLine("No Items in Inventory!\n");
             }
