@@ -8,32 +8,37 @@ namespace TurnBasedGame
 {
     public class MonsterItemDrop
     {
-        Items HealingPotion = new Items("Healing Potion", 15, "A simple Healing Potion");
+        public static bool swordEquipped = false;
+
+        Items HealingPotion = new Items("Healing Potion", "A simple Healing Potion",0,0,15);
         Items IronSword = new Items("Sword", "A normal sword", 3, 6);
-        public void Drop(MonsterConst _monster, Player _player, Inventory _inventory) {
-            int _number = MonsterSpawner.RandomNumber(1, 15);
-            bool swordEquipped = false;
+        public void Drop(MonsterConst _monster, Player player, Inventory inventory) {
+            int number = MonsterSpawner.RandomNumber(1, 15);
+            
 
 
-            switch (_number)//If a monster is killed and it fits the switch case it will either drop a certain item or nothing
+            switch (number)//If a monster is killed and it fits the switch case it will either drop a certain item or nothing
             {
                 case 1:
-                    if (swordEquipped == false)
-                    {
-                        Console.WriteLine($"The monster has dropped a Sword! It adds MIN {IronSword.minAttackDamage}  MAX {IronSword.maxAttackDamage} to your attacks!");
-
-                        _inventory.AddItem(IronSword);
-                        _player.EquipSword(IronSword);
-                        swordEquipped = true;
-                    }
-                    else { Console.WriteLine("Monster didn't drop anything\n"); break; }
+                        if(swordEquipped == true)
+                        {
+                            Console.WriteLine("Monster didn't drop anything\n"); break;
+                        }
+                        else if (swordEquipped == false)
+                        {
+                             swordEquipped = true;
+                             Console.WriteLine($"The monster has dropped a Sword! It adds MIN {IronSword.MinimumAttackDamage}  MAX {IronSword.MaximumAttackDamage} to your attacks!");
+                             inventory.AddItem(IronSword);
+                             player.EquipSword(IronSword);
+                            
+                        }
 
                     break;
 
                 case 2:
                     Console.WriteLine($"The monster has dropped a Healing Potion!");
 
-                    _inventory.AddItem(HealingPotion);
+                    inventory.AddItem(HealingPotion);
                     break;
                 default: Console.WriteLine("Monster didn't drop anything"); break;
             }

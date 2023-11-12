@@ -1,76 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace TurnBasedGame
 {
     public class Items
     {
-        private string _name;
-        private string _description;
-        private int _minattackDamage;
-        private int _maxattackDamage;
-        private int _maxhealing;
+        private string name;
+        private string description;
+        private int? minimumAttackDamage;
+        private int? maximumAttackDamage;
+        private int? maximumHealing;
 
         public string Name
         {
-            get { return _name; }
+            get { return name; }
             set
             {
-                _name = value;
+                name = value;
             }
         }
         public string Description
         {
-            get { return _description; }
+            get { return description; }
             set
             {
-                _description = value;
+                description = value;
             }
         }
-        public int maxAttackDamage
+        public int? MaximumAttackDamage
         {
-            get { return _maxattackDamage; }
+            get { return maximumAttackDamage; }
             set
             {
-                _maxattackDamage = value;
+                maximumAttackDamage = value;
             }
         }
-        public int minAttackDamage
+        public int? MinimumAttackDamage
         {
-            get { return _minattackDamage; }
+            get { return minimumAttackDamage; }
             set
             {
-                _minattackDamage = value;
+                minimumAttackDamage = value;
             }
         }
-        public int maxhealing
+        public int? MaximumHealing
         {
-            get { return _maxhealing; }
+            get { return maximumHealing; }
             set
             {
-                _maxhealing = value;
+                maximumHealing = value;
             }
         }
 
-
-        public Items(string Name, string Description, int minAttack, int maxAttack)
+        [JsonConstructor]
+        public Items(string name, string description, int? minimumAttackDamage = null, int? maximumAttackDamage = null, int? maximumHealing = null )
         {
-            _name=Name;
-            _description=Description;
-            _minattackDamage=minAttack;
-            _maxattackDamage=maxAttack;
+            Name = name;
+            Description = description;
+            MinimumAttackDamage = minimumAttackDamage;
+            MaximumAttackDamage = maximumAttackDamage;
+            MaximumHealing = maximumHealing;
         }
-        public Items(string Name,int maxHealing, string Description)
-        {
-            _name=Name;
-            _description=Description;
-            _maxhealing=maxhealing;
-        }
-
-        
     }
 
 

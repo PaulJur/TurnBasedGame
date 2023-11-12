@@ -8,7 +8,7 @@ namespace TurnBasedGame
 {
     public class Inventory
     {
-        private List<Items> Items = new List<Items>();
+        public List<Items> Items = new List<Items>();
 
         public void AddItem(Items item)//Adds an item to the List
         {

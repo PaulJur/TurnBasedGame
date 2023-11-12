@@ -23,7 +23,7 @@ namespace TurnBasedCombat
 
             bool orcBossKilled = false;
             var counter = 0;
-            Player player = new Player("Chad", 5000, 5000, 4, 11, 4, 6, 0, 0,0,10); //4 6 attack
+            Player player = new Player("Chad", 5000, 5000, 4, 11, 200, 200, 0, 0,0,10); //4 6 attack
             
 
             Console.WriteLine("Game made by Paulius Jurgelis\n");
@@ -182,6 +182,7 @@ namespace TurnBasedCombat
                         //Check the Player's inventory
                         if (choice == "inventory")
                         {
+                            Console.Clear();
                             inventory.ShowInventory();
                         }
                         //The player uses a potion
@@ -194,14 +195,14 @@ namespace TurnBasedCombat
                         //Save the game
                         if (choice == "save")
                         {
-                            DataSaveAndLoad.SaveGame(player,randomMonster);
+                            DataSaveAndLoad.SaveGame(player,randomMonster,inventory);
                             Console.WriteLine("Game saved successfully");
                             continue;
                         }
                         //Load the game
                         if (choice == "load")
                         {
-                            (player, randomMonster) = DataSaveAndLoad.LoadGame();
+                            (player, randomMonster,inventory) = DataSaveAndLoad.LoadGame();
 
                             if(player!= null && randomMonster != null)
                             {

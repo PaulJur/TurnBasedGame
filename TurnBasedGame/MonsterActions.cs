@@ -13,30 +13,30 @@ namespace TurnBasedGame
         public static void MonsterTakingAction(MonsterConst monster, Player player)
         {
             
-            bool _isDefending=false;
+            bool isDefending=false;
             int action = MonsterSpawner.RandomNumber(1, 3);//Picks from these numbers to choose an action for the monster
 
             switch (action)
             {
                 case 1:
-                    _isDefending = false;
-                    Defend(monster,player,_isDefending);
+                    isDefending = false;
+                    Defend(monster,player,isDefending);
 
                     Attack(monster,player);
                     break;
                 case 2:
-                    _isDefending = false;
-                    Defend(monster, player, _isDefending);
+                    isDefending = false;
+                    Defend(monster, player, isDefending);
 
                     Heal(monster,player);
 
                     break;
                 default:
-                    _isDefending = false;
-                    Defend(monster, player, _isDefending);
+                    isDefending = false;
+                    Defend(monster, player, isDefending);
 
-                    _isDefending = true;
-                    Defend(monster, player, _isDefending);
+                    isDefending = true;
+                    Defend(monster, player, isDefending);
 
                     break;
             }
@@ -79,9 +79,8 @@ namespace TurnBasedGame
 
             void Defend(MonsterConst monster, Player player, bool isDefending)
             {
-                _isDefending = isDefending;
 
-                if (_isDefending)
+                if (isDefending)
                 {
                     int currentTempHp = MonsterSpawner.RandomNumber(1, 10);
 
@@ -92,7 +91,7 @@ namespace TurnBasedGame
                     //Randomizes temporary hp variable and adds it to a list which then adds the number to the monsters hp.
 
                 }
-                else if(_isDefending==false && tempHpList.Count > 0)
+                else if(isDefending==false && tempHpList.Count > 0)
                 {
                     monster.HitPoints -= tempHpList[0];
                     Console.WriteLine($"Removed {tempHpList[0]} HP from enemy monster");

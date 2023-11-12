@@ -12,6 +12,7 @@ namespace TurnBasedGame
     //Player class for variables and their get; sets;
     public class Player
     {
+
         private string name;
         private int hitPoints;
         private int attackDamage;
@@ -164,12 +165,14 @@ namespace TurnBasedGame
 
         public void EquipSword(Items sword)
         {
-            minimumDamage += sword.minAttackDamage;
-            maximumDamage += sword.maxAttackDamage;
+
+            minimumDamage += sword.MinimumAttackDamage ?? 0;
+            maximumDamage += sword.MaximumAttackDamage ?? 0;
+
         }
         public void UsePotion(Items potion)
         {
-            HitPoints += potion.maxhealing;
+            HitPoints += potion.MaximumHealing ?? 0;
             if(HitPoints > maximumHitPoints)
             {
                 HitPoints= maximumHitPoints;

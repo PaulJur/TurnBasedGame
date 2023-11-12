@@ -46,7 +46,7 @@ namespace TurnBasedGame
             int levelReached = (playerLevel - 1) / 5;
             double levelMultiplier = 0.3;
 
-            double totalMultiplier =  Math.Pow(1 + levelMultiplier,levelReached); //every 5 levels, to the power of 1.2^0.2 
+            double totalMultiplier =  Math.Pow(1 + levelMultiplier,levelReached); //every 5 levels, to the power of 1.3^1 when level 10.
 
             return totalMultiplier;
         }
