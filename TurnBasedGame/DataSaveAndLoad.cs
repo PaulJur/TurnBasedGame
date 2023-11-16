@@ -28,18 +28,21 @@ namespace TurnBasedGame
                 this.inventoryItems = inventoryItems;
             }
         }
-        //Serializes both the Player and the Monster into a JSON file
+        //Serializes the Player, Monster and Inventory Items into a JSON file
         public static void SaveGame(Player player, MonsterConst monsterConst,Inventory inventory)
         {
             var saveData = new SaveData(player, monsterConst, inventory.Items);
             var jsonData = JsonSerializer.Serialize(saveData);
 
+#if DEBUG
             Console.WriteLine(jsonData);
+#endif
+
             File.WriteAllText("PlayerSave.json", jsonData);
         }
 
 
-        //Loads the saved JSON file and deserializes the data so it loads the monster and player stats. The way SaveData syntax is writen is very important. Player player and this.player etc.
+        //Loads the saved JSON file and deserializes the data so it loads the Inventory items, player stats and monster. The way SaveData syntax is writen is very important. Player player and this.player etc.
         public static (Player,MonsterConst,Inventory) LoadGame()
         {
             //Check if the files exists in the folder, can set custom pathing.
@@ -51,7 +54,7 @@ namespace TurnBasedGame
                 //Savedata receives the Player and Monster 
                 SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonData);
 
-                var inventory = new Inventory();
+                var inventory = new Inventory();//New inventory instance
                 inventory.Items = saveData.inventoryItems;
 
 
@@ -69,3 +72,4 @@ namespace TurnBasedGame
     }
 
 }
+ 

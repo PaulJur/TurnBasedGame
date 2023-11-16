@@ -64,16 +64,14 @@ namespace TurnBasedCombat
                     Console.WriteLine("------------------------------------------------------");
 
                     string? choice = Console.ReadLine();
-                    
+#if DEBUG
                     if(choice == "p")
                     {
                         Console.Clear();
                         MonsterActions.MonsterTakingAction(randomMonster, player);
                         
                     }
-
-
-
+#endif
                     if (choice == "a")
                     {
                         Console.Clear();

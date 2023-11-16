@@ -98,7 +98,12 @@ namespace TurnBasedGame
                 dodgeChance = value;
             }
         }
-        public MonsterConst(string name, int hitPoints, int minimumAttackDamage,int maximumAttackDamage, int minimumheal, int maximumHeal, int maximumHealth,int experienceDrop, int dodgeChance)
+
+        public List<MonsterAbilty> Abilties { get; set; }
+
+        //
+        public MonsterConst(string name, int hitPoints, int minimumAttackDamage,int maximumAttackDamage, int minimumheal, int maximumHeal, int maximumHealth,int experienceDrop,
+            int dodgeChance, List<MonsterAbilty> abilities)
         {
             Name = name;
             HitPoints = hitPoints;
@@ -109,6 +114,7 @@ namespace TurnBasedGame
             MaximumHealth = maximumHealth;
             ExperienceDrop = experienceDrop;
             DodgeChance = dodgeChance;
+            Abilties = abilities;
         }
         public bool Dodge(int dodgeChance)
         {
