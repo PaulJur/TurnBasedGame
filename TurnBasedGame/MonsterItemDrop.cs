@@ -13,7 +13,7 @@ namespace TurnBasedGame
         Items HealingPotion = new Items("Healing Potion", "A simple Healing Potion",0,0,15);
         Items IronSword = new Items("Sword", "A normal sword", 3, 6);
         public void Drop(MonsterConst _monster, Player player, Inventory inventory) {
-            int number = MonsterSpawner.RandomNumber(1, 15);
+            int number = MonsterSpawner.RandomNumber(1, 2);
             
 
 

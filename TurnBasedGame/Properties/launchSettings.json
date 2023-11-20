@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TurnBasedGame": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\Paulius\\source\\repos\\TurnBasedGame\\TurnBasedGame\\bin\\Debug"
+    }
+  }
+}

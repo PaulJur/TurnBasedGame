@@ -60,6 +60,7 @@ namespace TurnBasedCombat
                     Console.WriteLine("\nYOUR TURN\n");
                     Console.WriteLine($"Player Health: {player.HitPoints}\n");
                     Console.WriteLine($"Monster Health: {randomMonster.HitPoints}\n");
+                    Console.WriteLine($"Monster Ability: {randomMonster.Ability}\n");
                     Console.WriteLine("A TO ATTACK H TO HEAL          'stats' for player stats         Write 'help' if you need to remember");
                     Console.WriteLine("------------------------------------------------------");
 

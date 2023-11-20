@@ -99,11 +99,11 @@ namespace TurnBasedGame
             }
         }
 
-        public List<MonsterAbilty> Abilties { get; set; }
+        public MonsterAbility? Ability { get; set; }
 
         //
         public MonsterConst(string name, int hitPoints, int minimumAttackDamage,int maximumAttackDamage, int minimumheal, int maximumHeal, int maximumHealth,int experienceDrop,
-            int dodgeChance, List<MonsterAbilty> abilities)
+            int dodgeChance, MonsterAbility? ability)
         {
             Name = name;
             HitPoints = hitPoints;
@@ -114,7 +114,7 @@ namespace TurnBasedGame
             MaximumHealth = maximumHealth;
             ExperienceDrop = experienceDrop;
             DodgeChance = dodgeChance;
-            Abilties = abilities;
+            Ability = ability;
         }
         public bool Dodge(int dodgeChance)
         {
