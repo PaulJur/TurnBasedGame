@@ -7,6 +7,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
+using TurnBasedGame.Database;
 
 namespace TurnBasedGame
 {
@@ -28,17 +29,29 @@ namespace TurnBasedGame
                 this.inventoryItems = inventoryItems;
             }
         }
-        //Serializes the Player, Monster and Inventory Items into a JSON file
+        //Serializes the Player, Monster and Inventory Items and puts into a local database, will store into a json file if not found
         public static void SaveGame(Player player, MonsterConst monsterConst,Inventory inventory)
         {
             var saveData = new SaveData(player, monsterConst, inventory.Items);
             var jsonData = JsonSerializer.Serialize(saveData);
 
+
+            using (var context = new GameDbContext())
+            {
+                var saveDataEntity = new GameSaveDBData
+                {
+                    JsonData = jsonData
+                };
+
+                context.GameSaveData.Add(saveDataEntity);
+                context.SaveChanges();
+            }
+
 #if DEBUG
-            Console.WriteLine(jsonData);
+                Console.WriteLine(jsonData);
 #endif
 
-            File.WriteAllText("PlayerSave.json", jsonData);
+            //File.WriteAllText("PlayerSave.json", jsonData);
         }
 
 
