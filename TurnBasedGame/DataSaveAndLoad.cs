@@ -32,24 +32,36 @@ namespace TurnBasedGame
         //Serializes the Player, Monster and Inventory Items and puts into a local database, will store into a json file if not found
         public static void SaveGame(Player player, MonsterConst monsterConst,Inventory inventory)
         {
-            var saveData = new SaveData(player, monsterConst, inventory.Items);
-            var jsonData = JsonSerializer.Serialize(saveData);
-
 
             using (var context = new GameDbContext())
             {
-                var saveDataEntity = new GameSaveDBData
+                if(context.GameSaveData.Count() >= 3)
                 {
-                    JsonData = jsonData
-                };
+                    Console.WriteLine("Maximum saves reached.");
+                    return;
+                }
+                else
+                {
+                    var saveData = new SaveData(player, monsterConst, inventory.Items);
+                    var jsonData = JsonSerializer.Serialize(saveData);
 
-                context.GameSaveData.Add(saveDataEntity);
-                context.SaveChanges();
-            }
+                    var saveDataEntity = new GameSaveDBData
+                    {
+                        JsonData = jsonData
+                    };
+
+                    context.GameSaveData.Add(saveDataEntity);
+                    context.SaveChanges();
 
 #if DEBUG
-                Console.WriteLine(jsonData);
-#endif
+                    Console.WriteLine(jsonData);
+#endif          
+                }
+
+
+            }
+
+
 
             //File.WriteAllText("PlayerSave.json", jsonData);
         }

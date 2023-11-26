@@ -10,7 +10,7 @@ using TurnBasedGame;
 using System.Threading;
 using System.Diagnostics;
 using System.Text.Json;
-
+using TurnBasedGame.Database;
 
 namespace TurnBasedCombat
 {
@@ -73,7 +73,21 @@ namespace TurnBasedCombat
                         MonsterActions.MonsterTakingAction(randomMonster, player);
                         
                     }
+
+                    using (var context = new GameDbContext())//Display saved data in DB
+                    {
+                        var savedData = context.GameSaveData.ToList();
+
+                        if (choice == "data")
+                        {
+                            foreach (var item in savedData)
+                            {
+                                Console.WriteLine($"Save: {item.Id}, Save Data: {item.JsonData}\n");
+                            }
+                        }
 #endif
+                    }
+
                     if (choice == "a")
                     {
                         Console.Clear();
@@ -195,7 +209,7 @@ namespace TurnBasedCombat
                         //Save the game
                         if (choice == "save")
                         {
-                            DataSaveAndLoad.SaveGame(player,randomMonster,inventory);
+                            DataSaveAndLoad.SaveGame(player, randomMonster, inventory);
                             Console.WriteLine("Game saved successfully");
                             continue;
                         }
