@@ -210,7 +210,6 @@ namespace TurnBasedCombat
                         if (choice == "save")
                         {
                             DataSaveAndLoad.SaveGame(player, randomMonster, inventory);
-                            Console.WriteLine("Game saved successfully");
                             continue;
                         }
                         //Load the game
