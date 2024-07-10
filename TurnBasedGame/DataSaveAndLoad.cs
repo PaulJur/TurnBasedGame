@@ -82,8 +82,6 @@ namespace TurnBasedGame
 
             }
 
-
-
             //File.WriteAllText("PlayerSave.json", jsonData); THIS IS FOR SAVING TO JSON FILE
         }
 
